@@ -12,5 +12,6 @@ namespace Hackathon.API.Modeli
         [ForeignKey(nameof(Predmet))]
         public int PredmetId { get; set; }
         public Predmet Predmet { get; set; }
+        public string? NazivFajla { get; set; }
     }
 }
