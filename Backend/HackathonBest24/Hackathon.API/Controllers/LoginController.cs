@@ -32,10 +32,13 @@ namespace Hackathon.API.Controllers
             if (studentFound != null)
             {
                 studentFound.Logiran = true;
+                return Ok(new LoginResponse() { Id = studentFound.Id, Uloga = "student" });
             }
             else if (profesorFound != null)
             {
                 profesorFound.Logiran = true;
+                return Ok(new LoginResponse() { Id = profesorFound.Id, Uloga = "profesor" });
+
             }
             return Ok();
         }
@@ -45,5 +48,11 @@ namespace Hackathon.API.Controllers
     {
         public string Email { get; set; }
         public string Lozinka { get; set; }
+    }
+
+    public class LoginResponse
+    {
+        public int Id { get; set; }
+        public string Uloga { get; set; }
     }
 }
