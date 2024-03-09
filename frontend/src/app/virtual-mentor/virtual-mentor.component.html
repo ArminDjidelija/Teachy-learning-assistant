@@ -5,10 +5,10 @@
         <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/>
       </svg>
     </button>
-    <p>{{GPT_response}}</p>
+    <textarea disabled="true" rows="19" id="response">{{GPT_response}}</textarea>
   </div>
   <div id="search" style="display: none; justify-content: space-around;">
-    <textarea rows="1" [(ngModel)]="VM_pitanje" placeholder="Unesite pitanje..."></textarea>
+    <textarea id="pitanje" rows="1" [(ngModel)]="VM_pitanje" placeholder="Unesite pitanje..."></textarea>
     <button (click)="Pretraga()" class="btn">
       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
