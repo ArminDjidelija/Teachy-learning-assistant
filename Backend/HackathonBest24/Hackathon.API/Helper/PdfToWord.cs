@@ -48,6 +48,24 @@ namespace Hackathon.API.Helper
 
             return imageUrl;
         }
+        public static string GetFileOnline(string path, IWebHostEnvironment env)
+        {
+            string imageUrl = string.Empty;
+            string HostUrl = "https://localhost:7020";
+            string filepath = GetFilePath(path, env);
+
+            if (!System.IO.File.Exists(filepath))
+            {
+                imageUrl = "";
+            }
+            else
+            {
+                imageUrl = HostUrl + "/Fajlovi/Materijali/" + path;
+            }
+
+            return imageUrl;
+        }
+
 
         private static string GetFilePath(string productCode, IWebHostEnvironment env)
         {
