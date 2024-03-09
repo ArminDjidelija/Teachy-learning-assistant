@@ -1,11 +1,17 @@
 <div class="row">
+  <div *ngFor="let raz of razred" class="col-md-4 mb-4" style="text-align: center">
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h2 class="card-title">Broj ucenika u razredu: {{raz.brojUcenika}}</h2>
+        <p class="card-text">Razred: {{raz.naziv}}</p>
 
-<div *ngFor="let raz of razred" class="col-sm-6 mt-4" >
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Broj ucenika u razredu: {{raz.brojUcenika}}</h5>
-      <p class="card-text">{{raz.naziv}}</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8 mb-4 d-flex align-items-end justify-content-end">
+    <div class="chart mb-0" style="width: 70%; height: 200px;">
+      <canvas id="vrijeme"></canvas>
     </div>
   </div>
 </div>
