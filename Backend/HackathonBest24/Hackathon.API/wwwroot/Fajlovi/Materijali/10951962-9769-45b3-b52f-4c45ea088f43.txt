@@ -1,0 +1,34 @@
+110
+Inovacije 20
+Tehnicka 
+UX 
+Ucinkovitost
+Poslovni model
+
+Zastarjelost(unaprjedjenje) metoda ucenja u edukaciji sa fokusomo na Umjetnu inteligenciju
+
+
+2. Ispiti sa slobodnim unosom i crtanjem fotografija/grafova koji se automatski ispravljaju.
+
+Moduli za evaluaciju i samoevaluaciju 
+
+Moduli za samoevaluaciju zaduzeni su za vjezbanje predjenog gradiva od strane studenata, nastavnik nakon predjene odredjene oblasti kreira samoevaluacijski test. Samoevaluacijski test sastoji se od pitanja:ž
+a) tacno - netacno;
+b) vise ponudjenih jedan tacan;
+c) vise ponudjenih vise tacnih; 
+d) esejska pitanja;
+e) pitanja za fotografisanje;
+
+Pitanja tacno-netacno i pitanja sa vise ponudjenih odgovora kreiraju se na standardni nacin. Esejska pitanja kreiraju se na nacin da se odgovor studenta poredi sa tacnim odgovorom koristeci umjetnu inteligenciju. Pitanja sa fotografijama postavljaju se na nacin da se od studenta trazi da nacrta određeni crtež, te ga upload/a, fotografija se poredi sa rješenjima istreniranog modela, te se daje odgovor na pitanje. Pitanja koja odgovara umjetna inteligencija, obavezno se označavaju sa * za provjeru, uz odgovore za koje evaluacija nije dovoljno sigurna sa više nivoa provjerljivosti. Evaluacije se biljeze u bazu podataka, te profesor ima mogućnost da pregleda sa kojim oblastima studenti imaju najviše problema, te mu daje mogućnost da navedeno gradivo dodatno ponovi i objasni na narednom predavanju. Uspješnost i učestalost samoevaluacija se bilježi i otvara se mogućnost rangiranja studenata, te dobijanja određenih tipova nagrada. (dodatno razraditi nacine nagradjivanja). Samoevaluacijski modul će nakon svakog netačnog odgovora vratiti određeni "tip" studentu. U svrhu dodavanja "gamefication" segmenta, određeni testovi mogu imati health bar koji će studenti gubiti tokom davanja pogrešnih odgovora, odnosno koji studenti mogu puniti davanjem više tačnih odgovora za redom. 
+
+Profesor može kreirati samoevalucacijski test uz pomoć AI-a za svakog studenta, na osnovu rezultata prethodno odgovorenih testova.
+
+
+Što se tiče testnog modula. Studentima se ne daju tipovi, nema health bar-a, te se rezultat spašava u njihov portofolio, a način analize odgovora je sličan kao i prije.
+
+
+
+
+
+
+
