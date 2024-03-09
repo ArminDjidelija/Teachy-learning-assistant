@@ -15,5 +15,7 @@ namespace Hackathon.API.Modeli
         [ForeignKey(nameof(Razred))]
         public int RazredId { get; set; }
         public Razred Razred { get; set; }
+
+        public bool Logiran { get; set; } = false;
     }
 }

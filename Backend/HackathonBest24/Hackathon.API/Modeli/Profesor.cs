@@ -11,6 +11,7 @@ namespace Hackathon.API.Modeli
         public string Prezime { get; set; }
         public string Email { get; set; }
         public string Lozinka { get; set; }
+        public bool Logiran { get; set; } = false;
 
     }
 }
