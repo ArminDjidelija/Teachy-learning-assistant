@@ -14,6 +14,7 @@ namespace Hackathon.API.Controllers
         {
             _dbContext = dbContext;
         }
+
         [HttpPost]
         public ActionResult Generisi()
         {
@@ -108,13 +109,13 @@ namespace Hackathon.API.Controllers
             //predmet.Add(new Predmet { Naziv = "Historija" });
             //predmet.Add(new Predmet { Naziv = "Likovna kultura" });
 
-            test.Add(new Test { Naziv = "Test iz predmeta Biologija", Aktivan = false, AktivanDo = DateTime.Now, Predmet = predmet[0], Profesor = profesor[0], Razred = razred[3],Trajanje=2,UkupnoBodova=50});
-            test.Add(new Test { Naziv = "Test iz predmeta Muzicka kultura", Aktivan = false, AktivanDo = DateTime.Now, Predmet = predmet[1], Profesor = profesor[0], Razred = razred[3], Trajanje = 2, UkupnoBodova = 50 });
-            test.Add(new Test { Naziv = "Test iz predmeta Njemacki jezik", Aktivan = false, AktivanDo = DateTime.Now, Predmet = predmet[2], Profesor = profesor[0], Razred = razred[3], Trajanje = 2, UkupnoBodova = 50 });
+            test.Add(new Test { Naziv = "Test iz predmeta Biologija", Aktivan = true, AktivanDo = DateTime.Now, Predmet = predmet[0], Profesor = profesor[0], Razred = razred[3],Trajanje=2,UkupnoBodova=50});
+            test.Add(new Test { Naziv = "Test iz predmeta Muzicka kultura", Aktivan = true, AktivanDo = DateTime.Now, Predmet = predmet[1], Profesor = profesor[0], Razred = razred[3], Trajanje = 2, UkupnoBodova = 50 });
+            test.Add(new Test { Naziv = "Test iz predmeta Njemacki jezik", Aktivan = true, AktivanDo = DateTime.Now, Predmet = predmet[2], Profesor = profesor[0], Razred = razred[3], Trajanje = 2, UkupnoBodova = 50 });
             test.Add(new Test { Naziv = "Test iz predmeta Engleski jezik", Aktivan = false, AktivanDo = DateTime.Now, Predmet = predmet[3], Profesor = profesor[0], Razred = razred[3], Trajanje = 2, UkupnoBodova = 50 });
             test.Add(new Test { Naziv = "Test iz predmeta Geografija", Aktivan = false, AktivanDo = DateTime.Now, Predmet = predmet[4], Profesor = profesor[0], Razred = razred[3], Trajanje = 2, UkupnoBodova = 50 });
-            test.Add(new Test { Naziv = "Test iz predmeta Historija", Aktivan = false, AktivanDo = DateTime.Now, Predmet = predmet[5], Profesor = profesor[0], Razred = razred[3], Trajanje = 2, UkupnoBodova = 50 });
-            test.Add(new Test { Naziv = "Test iz predmeta Likovna kultura", Aktivan = false, AktivanDo = DateTime.Now, Predmet = predmet[6], Profesor = profesor[0], Razred = razred[3], Trajanje = 2, UkupnoBodova = 50 });
+            test.Add(new Test { Naziv = "Test iz predmeta Historija", Aktivan = false, AktivanDo = DateTime.Now, Predmet = predmet[5], Profesor = profesor[0], Razred = razred[3], Trajanje = 2, UkupnoBodova = 50, Zavrsen = true }); ;
+            test.Add(new Test { Naziv = "Test iz predmeta Likovna kultura", Aktivan = false, AktivanDo = DateTime.Now, Predmet = predmet[6], Profesor = profesor[0], Razred = razred[3], Trajanje = 2, UkupnoBodova = 50, Zavrsen = true });
 
             oblast.Add(new Oblast { Naziv = "Šume", Predmet = predmet[0]});
             oblast.Add(new Oblast { Naziv = "Biljke", Predmet = predmet[0] });

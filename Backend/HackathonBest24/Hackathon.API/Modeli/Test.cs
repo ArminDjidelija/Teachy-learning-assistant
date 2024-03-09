@@ -12,6 +12,7 @@ namespace Hackathon.API.Modeli
         public int Trajanje { get; set; }
         public int UkupnoBodova { get; set; }
         public bool IsDeleted { get; set; } = false;
+        public bool Zavrsen { get; set; } = false;
 
         public DateTime AktivanDo { get; set; }
         [ForeignKey(nameof(Razred))]

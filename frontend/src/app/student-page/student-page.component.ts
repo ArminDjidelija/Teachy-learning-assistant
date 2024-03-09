@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterLink, RouterOutlet} from "@angular/router";
 declare function init_plugin():any;
-
 @Component({
   selector: 'app-student-page',
   standalone: true,
