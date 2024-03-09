@@ -97,10 +97,31 @@
         <button type="button" (click)="DodajPitanjeDijalog=false" class="btn-close" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th style="width: 10%">Broj</th>
+              <th style="width: 80%">Pitanje</th>
+              <th style="width: 10%">Akcija</th>
 
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let pitanje of pitanjadodana; let i = index" >
+              <td>{{i+1}}</td>
+              <td>{{pitanje.tekst}}</td>
+              <td><button (click)="ObrisiPitanje(pitanje.id)" class="btn btn-danger">X</button></td>
+
+
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
         <div class="mb-3">
           <label class="form-label">Oblast</label>
-          <select class="form-control" [(ngModel)]="razredid" >
+          <select class="form-control" [(ngModel)]="oblastid"  (ngModelChange)="UcitajPitanja()">
             <option id="selectpredmet3"  *ngFor="let oblast of oblasti " [value]="oblast.oblast.id">{{oblast.oblast.naziv}}</option>
           </select>
         </div>
@@ -116,10 +137,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr >
-              <td>{{1}}</td>
-              <td >Koja zivotinja je kralj lavova</td>
-              <td><input type="checkbox"></td>
+            <tr *ngFor="let pitanje of pitanja; let i = index" >
+              <td>{{i+1}}</td>
+              <td>{{pitanje.tekst}}</td>
+              <td><button (click)="SpasiPitanje(pitanje.id)" class="btn btn-success">+</button></td>
 
 
             </tr>

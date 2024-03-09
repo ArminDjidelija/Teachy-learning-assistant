@@ -23,6 +23,7 @@ export class ProfesorTestoviComponent implements OnInit{
   public predmeti: any;
   private id: number | undefined;
   public razredi: any | null;
+  private testid: number|undefined;
   constructor(private http:HttpClient) {
   }
   ngOnInit(): void {
@@ -41,6 +42,9 @@ export class ProfesorTestoviComponent implements OnInit{
   aktivanDo: string | undefined;
   DodajPitanjeDijalog: boolean|undefined;
   public oblasti: any;
+  public pitanja:any;
+  oblastid: number|undefined;
+  pitanjadodana: any;
   getTestovi(){
     var url = MojConfig.adresa_servera+'/Testovi';
     return this.http.get<Test>(url).subscribe(x=>{
@@ -97,6 +101,8 @@ export class ProfesorTestoviComponent implements OnInit{
   DodajPitanja(id:number) {
 
     this.UcitajOblasti(id);
+    this.testid=id;
+    this.UcitajDodana();
     this.DodajPitanjeDijalog=true;
 
   }
@@ -106,6 +112,49 @@ export class ProfesorTestoviComponent implements OnInit{
       if(data.status==200)
       {
         this.oblasti=data.body;
+      }
+    })
+  }
+
+  UcitajPitanja() {
+   this.http.get(`https://localhost:7020/Pitanje/${this.oblastid}`,{observe:'response'}).subscribe((data)=>{
+     if(data.status==200)
+     {
+       this.pitanja=data.body;
+     }
+   })
+  }
+
+  SpasiPitanje(id:number) {
+    let obj = {
+      pitanjeId: id,
+      testId: this.testid
+    }
+
+    this.http.post(`https://localhost:7020/PitanjaTestovi`,obj,{observe:'response'}).subscribe((data)=>{
+      if(data.status==200)
+      {
+        alert("Uspjesno dodano")
+        this.UcitajDodana();
+      }
+    })
+  }
+
+  private UcitajDodana() {
+    this.http.get(`https://localhost:7020/PitanjaTestovi?id=${this.testid}`,{observe:'response'}).subscribe((data)=>{
+      if(data.status==200)
+      {
+        this.pitanjadodana=data.body;
+      }
+    })
+  }
+
+  ObrisiPitanje(id:number) {
+    this.http.delete(`https://localhost:7020/PitanjaTestovi?id=${id}`,{observe:'response'}).subscribe((data)=>{
+      if(data.status==200)
+      {
+        alert("Uspjesno obrisano");
+        this.UcitajDodana();
       }
     })
   }
