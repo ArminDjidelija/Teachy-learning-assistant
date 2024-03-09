@@ -1,10 +1,4 @@
-﻿using Syncfusion.Pdf.Parsing;
-using Syncfusion.Pdf;
-using System.Reflection;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using Google.Protobuf.Collections;
-using SautinSoft;
+﻿using System.Text;
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
 using iText.Kernel.Pdf.Canvas.Parser;
