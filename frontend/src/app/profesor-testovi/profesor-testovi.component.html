@@ -1,0 +1,42 @@
+<div class="container">
+  <h2>Vertical List</h2>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="filter">Filter testova</label>
+          <input type="text" class="form-control" id="filter">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <button class="btn btn-primary float-right">Kreiraj test</button>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Br</th>
+        <th>Naziv</th>
+        <th>Trajanje</th>
+        <th>Ukupno bodova</th>
+        <th>Aktivan do</th>
+        <th>Razred</th>
+        <th>Predmet</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let t of test;let i=index">
+        <th scope="row">{{i+1}}</th>
+        <th>{{t.naziv}}</th>
+        <th>{{t.trajanje}}</th>
+        <th>{{t.ukupnoBodova}}</th>
+        <th>{{t.aktivanDo|date}}</th>
+        <th>{{t.razredId}}</th>
+        <th>{{t.predmet.naziv}}</th>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
