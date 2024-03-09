@@ -5,7 +5,7 @@
 namespace Hackathon.API.Migrations
 {
     /// <inheritdoc />
-    public partial class miggg : Migration
+    public partial class miglilaa : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -40,12 +40,13 @@ namespace Hackathon.API.Controllers
         {
             var studentitestovi = _applicationDbContext.StudentiTestovi.Include(x => x.Student).Include(x => x.Test).Where(x => x.TestId == testid).Select(x => new
             {
-                Id=x.Id,
+                Id = x.Id,
                 ImePrezime = x.Student.Ime + " " + x.Student.Prezime,
-                NazivTesta=x.Test.Naziv,
-                DatumPocetka=x.DatumPocetka,
-                DatumZavrsetka=x.DatumZavrsetka,
-                UkupnoBodova=x.Test.UkupnoBodova
+                NazivTesta = x.Test.Naziv,
+                DatumPocetka = x.DatumPocetka,
+                DatumZavrsetka = x.DatumZavrsetka,
+                UkupnoBodova = x.Test.UkupnoBodova,
+                OsvojeniBodovi = x.OsvojeniBodovi
             }).ToList();
         
             if(studentitestovi != null)

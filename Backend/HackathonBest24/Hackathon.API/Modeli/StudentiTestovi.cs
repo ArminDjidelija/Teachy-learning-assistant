@@ -8,6 +8,7 @@ namespace Hackathon.API.Modeli
         [Key]
         public int Id { get; set; }
         public int? UkupnoBodova { get; set; } = 0;
+        public int? OsvojeniBodovi { get; set; } = 0;
         public DateTime DatumPocetka { get; set; }
         public DateTime? DatumZavrsetka { get; set; }
         public bool? Zavrsen { get; set; } = false;

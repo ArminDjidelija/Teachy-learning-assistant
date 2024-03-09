@@ -326,6 +326,9 @@ namespace Hackathon.API.Migrations
                     b.Property<DateTime?>("DatumZavrsetka")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("OsvojeniBodovi")
+                        .HasColumnType("int");
+
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 

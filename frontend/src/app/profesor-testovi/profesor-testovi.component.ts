@@ -34,6 +34,7 @@ export class ProfesorTestoviComponent implements OnInit{
     this.UcitajPredmete();
     this.UcitajRazrede();
   }
+  odabranitestid:number=0;
   otvoriDijalog:boolean=false;
   test:any;
   predmetid: number |undefined ;
@@ -165,6 +166,7 @@ export class ProfesorTestoviComponent implements OnInit{
 
   OtvoriTestove(id:number) {
     this.otvoriTestoviModal=true;
+    this.odabranitestid=id;
     this.UcitajTestoveStudente(id);
   }
 
@@ -179,7 +181,10 @@ export class ProfesorTestoviComponent implements OnInit{
 
   Ocijeni(id:number) {
     this.http.put(`https://localhost:7020/api/TestoviStudentOdgovori?teststudentid=${id}`,1,{observe:'response'}).subscribe((data)=>{
-
+      if(data.status==200)
+      {
+        this.UcitajTestoveStudente(this.odabranitestid);
+      }
     })
   }
 }

@@ -47,7 +47,7 @@ namespace Hackathon.API.Helper
             // Prolazimo kroz svaki dio stringArray-a i pretvaramo ga u int
             int[] intArray = Array.ConvertAll(stringArray, int.Parse);
 
-            var bodovi = int.Parse(response);
+
 
             return intArray;
         }
