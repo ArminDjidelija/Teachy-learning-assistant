@@ -1,4 +1,5 @@
-﻿using Hackathon.API.Modeli;
+﻿using Hackathon.API.Helper;
+using Hackathon.API.Modeli;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,21 +13,36 @@ namespace Hackathon.API.Controllers
     public class TestoviStudentOdgovoriController : ControllerBase
     {
         private readonly ApplicationDbContext _applicationDbContext;
-        public TestoviStudentOdgovoriController(ApplicationDbContext applicationDbContext)
+        private readonly IConfiguration _configuration;
+
+        IspraviEsejskoHelper _esejskoHelper = new IspraviEsejskoHelper();
+        public TestoviStudentOdgovoriController(ApplicationDbContext applicationDbContext, IConfiguration configuration)
         {
             _applicationDbContext = applicationDbContext;
+            _configuration = configuration;
         }
 
         [HttpPut]
         public async Task<ActionResult> Put([FromQuery] int teststudentid)
         {
-            var lista = _applicationDbContext.StudentiTestoviOdgovori.Include(x => x.Odgovor).Where(x=>x.StudentiTestoviId==teststudentid).ToList();
-
-            if(lista!=null)
+            var lista = _applicationDbContext.StudentiTestoviOdgovori.Include(x => x.Odgovor).ThenInclude(x=>x.Pitanje).Where(x=>x.StudentiTestoviId==teststudentid).ToList();
+            int ukupnoBodovi = 0;
+            foreach (var item in lista)
             {
-                return Ok(lista);
+                var obj = new IspraviEsejskoDto
+                {
+                    OdgovorTacan = item.Odgovor.Tekst,
+                    OdgovorKorisnik = item.Odgovor.Esejsko,
+                    Bodovi = item.Odgovor.Pitanje.BrojBodova,
+                    Pitanje = item.Odgovor.Pitanje.Tekst
+
+                };
+
+                var brojBodova = await _esejskoHelper.IspraviEsejsko(_configuration, obj);
+                ukupnoBodovi += brojBodova;
             }
-            return NotFound();
+
+            return Ok(ukupnoBodovi);
         }
     }
 }
