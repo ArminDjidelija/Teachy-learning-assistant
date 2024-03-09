@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hackathon.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240310070943_1")]
-    partial class _1
+    [Migration("20240309084603_promjenaSifraNaziv")]
+    partial class promjenaSifraNaziv
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,6 +76,9 @@ namespace Hackathon.API.Migrations
 
                     b.Property<int>("PredmetId")
                         .HasColumnType("int");
+
+                    b.Property<string>("SifraFajla")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
