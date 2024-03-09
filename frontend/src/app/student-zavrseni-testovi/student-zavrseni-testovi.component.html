@@ -1,1 +1,12 @@
-<p>student-zavrseni-testovi works!</p>
+<div class="row">
+  <div  class="col-md-4 mb-4" style="text-align: center">
+    <div class="card" style="width: 18rem;" *ngFor="let zavr of zavrseniTestovi">
+      <div class="card-body">
+        <h5 class="card-title">{{zavr.test}}</h5>
+        <div id="btnHolder">
+          <button class="btn btn-success mt-3 w-50">Pogledaj detalje</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
