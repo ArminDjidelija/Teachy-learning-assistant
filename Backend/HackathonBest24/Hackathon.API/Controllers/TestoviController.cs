@@ -38,9 +38,9 @@ namespace Hackathon.API.Controllers
         }
 
         [HttpGet("getzavrseni")]
-        public async Task<ActionResult> GetZavrseni()
+        public async Task<ActionResult> GetZavrseni([FromQuery] int studentID)
         {
-            var student = _applicationDbContext.Student.First();
+            var student = await _applicationDbContext.Student.FindAsync(studentID);
 
             if (student != null)
             {

@@ -7,6 +7,7 @@ import {Dialog} from "@angular/cdk/dialog";
 import {DialogService} from "../services/dialog-service";
 import {Razred, RazredLista} from "./get-razredi-profesor";
 import {CommonModule} from "@angular/common";
+import {virtualManagerService} from "../services/virtualManager-service";
 declare function init_plugin():any;
 @Component({
   selector: 'app-profesor-page',
@@ -26,6 +27,7 @@ export class ProfesorPageComponent {
   ngOnInit(): void {
     init_plugin();
     this.getRazred();
+    virtualManagerService.showVirtualManager = true;
   }
   razred:any;
   getRazred(){
