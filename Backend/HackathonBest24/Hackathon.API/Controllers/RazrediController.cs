@@ -1,6 +1,7 @@
 ﻿using Hackathon.API.Modeli;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hackathon.API.Controllers
 {
@@ -18,10 +19,25 @@ namespace Hackathon.API.Controllers
         public async Task<ActionResult> Get()
         {
             var profesor = _applicationDbContext.Profesor.FirstOrDefault();
-            var razredi = _applicationDbContext
-                .Razred
-                .Where(x=>)
+
+            var profesoriRazredi = new List<RazrediProfesor>();
+
+            if (profesor != null)
+            {
+                profesoriRazredi = _applicationDbContext
+                .RazrediProfesor
+                .Include(x => x.Profesor)
+                .Include(x => x.Razred)
+                .Where(x => x.ProfesorId == profesor.Id)
                 .ToList();
+            }
+
+            var razredi = new List<Razred>();
+
+            foreach(var prof in profesoriRazredi)
+            {
+                razredi.Add(prof.Razred);
+            }
 
 
             return Ok(razredi);
