@@ -1,1 +1,82 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+.confirm-dialog-container .mat-dialog-container{
+  border-radius: .25em .25em .4em .4em;
+  padding: 0px;
+}
+
+.confirm-dialog-container .content-container{
+  margin:5px 5px 15px 5px;
+  color:#8f9cb5;
+  display: flex;
+}
+.confirm-dialog-container #close-icon{
+  margin-left: auto;
+  order:2;
+  font-weight: bolder;
+}
+.confirm-dialog-container #close-icon:hover{
+  cursor:pointer;
+}
+.confirm-dialog-container #yes-button{
+  height: 50px;
+  width: 50%;
+  background-color: #b6bece;
+  color: white;
+  border-radius: 0px;
+}
+.confirm-dialog-container #no-button{
+  height: 50px;
+  width: 50%;
+  background-color: rgb(21,115,71);
+  color: white;
+  border-radius: 0px;
+  border-color: rgb(21,115,71);
+}
+.btn-dialog-close{
+  width: 45px;
+  min-width: 0px !important;
+  height: 40px;
+  padding: 0px !important;
+}
+
+
+
+
+.ok-dialog-container .mat-dialog-container{
+  border-radius: .25em .25em .4em .4em;
+  padding: 0px;
+  text-align: center;
+}
+.ok-dialog-container .content-container{
+  margin:5px 5px 15px 5px;
+  color:#8f9cb5;
+  display: flex;
+}
+
+.ok-dialog-container #close-icon{
+  margin-left: auto;
+  order:2;
+  font-weight: bolder;
+}
+.ok-dialog-container #close-icon:hover{
+  cursor:pointer;
+}
+.ok-dialog-container #ok-button{
+  height: 50px;
+  width: 100%;
+  background-color: rgb(21,115,71);
+  color: white;
+  border-radius: 0px;
+}
+.btn-dialog-close{
+  width: 45px;
+  min-width: 0px !important;
+  height: 40px;
+  padding: 0px !important;
+}

@@ -1,0 +1,134 @@
+.formContainer {
+  max-width:320px;
+  box-shadow : 4px 8px 16px #d7d7d7;
+  margin:0 auto;
+  padding:20px;
+  border-radius:0px 0px 4px 4px;
+}
+input {
+  box-shadow:none !important;
+  outline:none;
+}
+#btnHolder {
+  margin:0px -20px -20px -20px;
+  padding: 5px;
+
+}
+#btnHolder .btn {
+  border-radius:0px 0px 4px 4px !important;
+  height:60px;
+}
+
+.login-page main
+{
+  width:100%;
+  max-width:460px;
+  margin:8% auto 5%
+}
+.login-block
+{
+  background-color:#fff;
+  padding:60px;
+  -webkit-box-shadow:0 3px 50px 0 rgba(0,0,0,.1);
+  box-shadow:0 3px 50px 0 rgba(0,0,0,.1);
+  text-align:center;
+  border-radius:5px
+}
+.login-block h1,.login-block h6
+{
+  font-family:Open Sans,sans-serif;
+  color:#96a2b2;
+  letter-spacing:1px
+}
+.login-block h1
+{
+  font-size:22px;
+  margin-bottom:60px;
+  margin-top:40px
+}
+.login-block h6
+{
+  font-size:11px;
+  text-transform:uppercase;
+  margin-top:0
+}
+.login-block .form-group
+{
+  margin-top:15px;
+  margin-bottom:15px;
+}
+.login-block .form-control,.login-block .form-control:focus,.login-block .input-group-addon,.login-block .input-group-addon:focus
+{
+  background-color:transparent;
+  border:none;
+}
+.login-block .form-control
+{
+  font-size:17px;
+  border-radius:0px;
+}
+.login-block input:-webkit-autofill
+{
+  -webkit-box-shadow:0 0 0 1000px #fff inset;
+  -webkit-text-fill-color:#818a91;
+  -webkit-transition:none;
+  -o-transition:none;
+  transition:none;
+}
+.login-block .input-group-addon
+{
+  color:#29aafe;
+  font-size:19px;
+  opacity:.5
+}
+.login-block .btn-block
+{
+  margin-top:30px;
+  padding:10px;
+  width: 40%;
+}
+.login-block .hr-xs
+{
+  margin-top:5px;
+  margin-bottom:5px
+}
+.login-footer
+{
+  margin-top:60px;
+  opacity:.5;
+  -webkit-transition:opacity .3s ease-in-out;
+  -o-transition:opacity .3s ease-in-out;
+  transition:opacity .3s ease-in-out
+}
+.login-footer:hover
+{
+  opacity:1
+}
+.login-links
+{
+  padding:15px 5px 0;
+  font-size:13px;
+  color:#96a2b2
+}
+.login-links:after
+{
+  content:'';
+  display:table;
+  clear:both
+}
+.login-links a
+{
+  color:#96a2b2;
+  opacity:.9
+}
+.login-links a:hover
+{
+  color:#29aafe;
+  opacity:1
+}
+.txt-brand {
+  cursor: pointer;
+}
+
+
+
