@@ -18,7 +18,7 @@ export const routes: Routes = [
   {path:'login', component:PrijavaComponent},
   {path:'student', component:StudentPageComponent, children:[
       {path:'testovi', component:TestoviStudentComponent},
-      {path:'test/:id', component: StudentTestComponent}
+      {path:'test/:id', component: StudentTestComponent},
       {path:'materijali', component:MaterijaliStudentComponent},
       {path:'pocetna', component:StudentPocetnaComponent},
       {path:'zavrseni', component:StudentZavrseniTestoviComponent},
