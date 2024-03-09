@@ -16,6 +16,7 @@ export const routes: Routes = [
   {path:'profesor', component:ProfesorPageComponent,children:[
       {path:'pitanjaprofesor',component:ProfesorPitanjaComponent}
     ]},
+  {path:'pocetna', component:LandingPageComponent, pathMatch:'full'},
 
 
 ];

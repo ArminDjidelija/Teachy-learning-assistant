@@ -10,13 +10,13 @@
 
       <hr class="hr-xs">
       <div class="form-floating my-3">
-        <input type="text" class="form-control" id="floatingInput" placeholder="Korisničko ime"
-               [ngModelOptions]="{standalone: true}" [(ngModel)]="">
+        <input type="text" class="form-control" id="floatingInput" placeholder="Email"
+               [ngModelOptions]="{standalone: true}" [(ngModel)]="loginRequest.email">
         <label for="floatingInput">Email:</label>
       </div>
       <div class="form-floating">
         <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
-               [ngModelOptions]="{standalone: true}">
+               [ngModelOptions]="{standalone: true}" [(ngModel)]="loginRequest.lozinka">
         <label for="floatingPassword">Lozinka</label>
       </div>
 

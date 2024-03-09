@@ -6,6 +6,7 @@ import {LoginRequest} from "./login-request";
 import {MojConfig} from "../moj-config";
 import {HttpClient} from "@angular/common/http";
 import {diagnose} from "@angular-devkit/build-angular/src/tools/esbuild/angular/compilation/parallel-worker";
+import {AuthLoginResponse} from "./auth-login-response";
 
 @Component({
   selector: 'app-prijava',
@@ -20,25 +21,31 @@ import {diagnose} from "@angular-devkit/build-angular/src/tools/esbuild/angular/
 export class PrijavaComponent {
 
   constructor(private dialogService: DialogService, private router: Router,
-              private httpClient:HttpClient) {
+              private httpClient: HttpClient) {
   }
 
-  public loginRequest:LoginRequest={
-    lozinka:"",
-    email:"",
+  public loginRequest: LoginRequest = {
+    lozinka: "",
+    email: "",
   }
 
   logirajSe() {
-    let url=MojConfig.adresa_servera+`/Login`;
+    let url = MojConfig.adresa_servera + `/Login`;
 
-    this.httpClient.post<LoginRequest>(url,this.loginRequest).subscribe((x=>{
-      this.dialogService.openOkDialog("Uspješna prijava!").afterClosed().subscribe(x=>{
-        if(x==true){
-          this.router.navigate(['/'])
-        }
-      })
+    this.httpClient.post<AuthLoginResponse>(url, this.loginRequest).subscribe((x => {
+      if (x.uloga == "student") {
+        this.router.navigate(['/student']);
+        this.dialogService.openOkDialog("Uspješna prijava");
+      } else if (x.uloga == "profesor") {
+        this.router.navigate(['/profesor']);
+        this.dialogService.openOkDialog("Uspješna prijava");
+      }
+      localStorage.setItem('id', x.id.toString());
+      localStorage.setItem('uloga', x.uloga.toString());
+
     }), error => {
       this.dialogService.openOkDialog("Pogrešan username/password!")
     });
+
   }
 }
