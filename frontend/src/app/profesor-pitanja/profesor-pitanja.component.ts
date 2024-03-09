@@ -40,6 +40,13 @@ export class ProfesorPitanjaComponent implements OnInit {
   tekstOdgovoraPravi: number|undefined;
   tacanodgovor: boolean=false;
   esejsko: string|undefined;
+  generisiModal: boolean = false;
+  generisiOblastID:number = 0;
+  public generisanaPitanja: any[] = [];
+  toggleGenerisanaPitanja: boolean = true;
+  trenutnoPitanje: number=0;
+  predmetid2: number = 0;
+  brojPitanjaZaGenerisanje: number = 0;
 
   constructor(private client:HttpClient, private route: ActivatedRoute, private router:Router,
               private dialogService:DialogService) {
@@ -50,6 +57,7 @@ export class ProfesorPitanjaComponent implements OnInit {
     this.id=parseInt(localStorage.getItem("id")!);
     this.UcitajPitanja();
     this.UcitajTipove();
+    this.UcitajPredmete();
   }
 
 
@@ -67,8 +75,6 @@ export class ProfesorPitanjaComponent implements OnInit {
     this.UcitajOdgovore(pit.id);
     this.UcitajOblasti(pit.id);
     this.odgovoriModal=true;
-
-
   }
 
   private UcitajOdgovore(num:number) {
@@ -110,7 +116,6 @@ export class ProfesorPitanjaComponent implements OnInit {
   }
 
   PromjenaPredmeta() {
-    let id = parseInt((document.getElementById("selectpredmet") as HTMLSelectElement).value);
     this.client.get(`https://localhost:7020/Oblast?PredmetId=${this.predmetid}`, {observe:'response'}).subscribe((data)=>{
       if(data.status==200)
       {
@@ -118,7 +123,15 @@ export class ProfesorPitanjaComponent implements OnInit {
       }
     })
   }
-
+  PromjenaPredmeta2()
+  {
+    this.client.get(`https://localhost:7020/Oblast?PredmetId=${this.predmetid2}`, {observe:'response'}).subscribe((data)=>{
+      if(data.status==200)
+      {
+        this.oblasti=data.body;
+      }
+    })
+  }
   SpasiPitanje() {
     let obj = {
       tekst: this.tekstOdgovora,
@@ -174,5 +187,32 @@ export class ProfesorPitanjaComponent implements OnInit {
         this.UcitajPitanja();
       }
     })
+  }
+
+  ToggleGenerisiModal() {
+    this.generisiModal = !this.generisiModal;
+  }
+
+  Generisi() {
+    let url = `https://localhost:7020/AiPitanjaGenerator?OblastId=${this.odabranaoblast}&BrojPitanja=${this.brojPitanjaZaGenerisanje}`;
+    this.client.get(url).subscribe((data:any)=>
+    {
+      this.generisanaPitanja = data;
+    });
+    this.generisiModal = false;
+  }
+
+  Previous() {
+    if(this.trenutnoPitanje>0)
+    {
+      this.trenutnoPitanje--;
+    }
+  }
+
+  Next() {
+    if(this.trenutnoPitanje<this.generisanaPitanja.length-1)
+    {
+      this.trenutnoPitanje++;
+    }
   }
 }
