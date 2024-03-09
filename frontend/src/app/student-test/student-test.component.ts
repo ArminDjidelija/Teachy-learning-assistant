@@ -4,6 +4,8 @@ import {HttpClient} from "@angular/common/http";
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {ListaKorisnika, ListaKorisnikaResponse} from "./studenttest-classes";
+import {VirtualMentorComponent} from "../virtual-mentor/virtual-mentor.component";
+import {virtualManagerService} from "../services/virtualManager-service";
 
 @Component({
   selector: 'app-student-test',
@@ -100,5 +102,6 @@ export class StudentTestComponent implements OnInit{
         this.router.navigate(["/student/testovi"]);
       }
     })
+    virtualManagerService.showVirtualManager = true;
   }
 }

@@ -202,17 +202,37 @@ export class ProfesorPitanjaComponent implements OnInit {
     this.generisiModal = false;
   }
 
-  Previous() {
-    if(this.trenutnoPitanje>0)
-    {
-      this.trenutnoPitanje--;
-    }
-  }
-
-  Next() {
+  Preskoci() {
     if(this.trenutnoPitanje<this.generisanaPitanja.length-1)
     {
       this.trenutnoPitanje++;
+    }
+    else
+    {
+      this.generisanaPitanja = [];
+      this.toggleGenerisanaPitanja = false;
+      this.UcitajPitanja();
+    }
+  }
+
+  DodajPitanje() {
+    let url = 'https://localhost:7020/PitanjeOdgovoriPost';
+    this.client.post(url,{
+      oblastId:this.odabranaoblast,
+      profesorId:localStorage.getItem('id'),
+      pitanje:this.generisanaPitanja[this.trenutnoPitanje].pitanje.tekst,
+      brojBodova: this.generisanaPitanja[this.trenutnoPitanje].pitanje.brojBodova,
+      odgovori:this.generisanaPitanja[this.trenutnoPitanje].odgovori
+    }).subscribe();
+    if(this.trenutnoPitanje<this.generisanaPitanja.length-1)
+    {
+      this.trenutnoPitanje++;
+    }
+    else
+    {
+      this.generisanaPitanja = [];
+      this.toggleGenerisanaPitanja = false;
+      this.UcitajPitanja();
     }
   }
 }
