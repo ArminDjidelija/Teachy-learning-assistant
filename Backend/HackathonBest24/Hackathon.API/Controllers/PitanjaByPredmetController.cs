@@ -21,7 +21,7 @@ namespace Hackathon.API.Controllers
             var oblasti = await _applicationDbContext.Oblast.Include(x => x.Predmet).ToListAsync();
             var pitanja = _applicationDbContext
                 .Pitanje
-                .Include(x => x.Oblast)
+                .Include(x => x.Oblast).Where(x=>x.IsDeleted==false)
                 .ToList();
 
             var predmeti = _applicationDbContext

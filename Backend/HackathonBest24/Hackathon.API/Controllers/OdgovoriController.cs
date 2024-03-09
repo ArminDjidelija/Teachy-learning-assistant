@@ -31,6 +31,21 @@ namespace Hackathon.API.Controllers
 
             return Ok();
         }
+
+
+        [HttpDelete]
+        public async Task<ActionResult> Delete([FromQuery] int id)
+        {
+            var obj = _applicationDbContext.Odgovor.Where(x=>x.Id == id).FirstOrDefault();
+            obj.IsDeleted = true;
+
+            _applicationDbContext.Update(obj);
+            _applicationDbContext.SaveChanges();
+
+
+
+            return Ok();
+        }
     }
 
     public class OdgovorPostRequest

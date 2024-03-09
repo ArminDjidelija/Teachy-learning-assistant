@@ -1,6 +1,7 @@
 ﻿using Hackathon.API.Modeli;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hackathon.API.Controllers
@@ -28,6 +29,19 @@ namespace Hackathon.API.Controllers
             };
 
             _applicationDbContext.Pitanje.Add(novo);
+            _applicationDbContext.SaveChanges();
+
+            return Ok();
+        }
+
+
+        [HttpDelete]
+        public async Task<ActionResult> Delete([FromQuery] int id)
+        {
+            var obj = _applicationDbContext.Pitanje.Where(x=>x.Id== id).FirstOrDefault();
+            obj.IsDeleted = true;
+
+            _applicationDbContext.Update(obj);
             _applicationDbContext.SaveChanges();
 
             return Ok();
