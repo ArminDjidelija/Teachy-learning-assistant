@@ -1,1 +1,19 @@
-<p>student-zavrseni-testovi works!</p>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">Predmet</th>
+    <th scope="col">Naziv testa</th>
+    <th scope="col">Datum </th>
+    <th scope="col">Broj ostvarenih bodova</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let zavr of zavrseniTestovi">
+    <td>{{zavr.test.predmet.naziv}}</td>
+    <td>{{zavr.test.naziv}}</td>
+    <td>{{zavr.datumPocetka | date}}</td>
+    <td>{{zavr.ukupnoBodova}}</td>
+  </tr>
+  </tbody>
+</table>

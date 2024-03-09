@@ -24,7 +24,7 @@ export class StudentTestComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.ZapočniTest();
+
     this.testID = Number(this.route.snapshot.paramMap.get('id'));
     this.GetPitanjaIOdgovori();
   }
