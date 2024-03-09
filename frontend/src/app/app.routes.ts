@@ -8,12 +8,14 @@ import {ProfesorPitanjaComponent} from "./profesor-pitanja/profesor-pitanja.comp
 import {ProfesorTestoviComponent} from "./profesor-testovi/profesor-testovi.component";
 import {ProfesorMaterijaliComponent} from "./profesor-materijali/profesor-materijali.component";
 import {ProfesorPocetnaComponent} from "./profesor-pocetna/profesor-pocetna.component";
+import {MaterijaliStudentComponent} from "./materijali-student/materijali-student.component";
 
 export const routes: Routes = [
   {path:'', component:LandingPageComponent, pathMatch:'full'},
   {path:'login', component:PrijavaComponent},
   {path:'student', component:StudentPageComponent, children:[
       {path:'testovi', component:TestoviStudentComponent},
+      {path:'materijali', component:MaterijaliStudentComponent},
 
     ]},
   {path:'profesor', component:ProfesorPageComponent,children:[
