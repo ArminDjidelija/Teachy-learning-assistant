@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Predmeti, PredmetiGet} from "./dohvati-predmete";
 import {MojConfig} from "../moj-config";
 import {NgForOf} from "@angular/common";
+import {PredmResponse} from "./dohvati-predmete";
 
 @Component({
   selector: 'app-student-pocetna',
@@ -22,10 +22,12 @@ export class StudentPocetnaComponent implements OnInit{
     this.dohvatiPredmete();
   }
 
-  predmeti:PredmetiGet[]=[];
+  predmeti:PredmResponse[]=[];
   dohvatiPredmete(){
-    let url=MojConfig.adresa_servera+`/Predmeti`;
-    this.httpClient.get<Predmeti>(url).subscribe((x=>{
+    let id=localStorage.getItem('id');
+    console.log(id)
+    let url=MojConfig.adresa_servera+`/Predmeti?studentId=${id}`;
+    this.httpClient.get<PredmResponse[]>(url).subscribe((x=>{
       this.predmeti=x;
     }))
   }

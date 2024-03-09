@@ -36,7 +36,7 @@ namespace Hackathon.API.Controllers
                 _applicationDbContext.Add(new Odgovor()
                 {
                     PitanjeId = pitanjeDodano.Id,
-                    Tekst = odg.Odgovor,
+                    Tekst = odg.Tekst,
                     Tacan = odg.Tacan,
                 });
                 _applicationDbContext.SaveChanges();
@@ -58,7 +58,7 @@ namespace Hackathon.API.Controllers
 
     public class OdgovorPitanjeDto
     {
-        public string Odgovor { get; set; }
+        public string Tekst { get; set; }
         public bool Tacan { get; set; }
     }
 }

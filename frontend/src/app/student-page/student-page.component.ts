@@ -4,7 +4,6 @@ import {MojConfig} from "../moj-config";
 import {HttpClient} from "@angular/common/http";
 import {DialogService} from "../services/dialog-service";
 import {LogoutRequest} from "./logout-request";
-import {Predmeti, PredmetiGet} from "../student-pocetna/dohvati-predmete";
 declare function init_plugin():any;
 @Component({
   selector: 'app-student-page',

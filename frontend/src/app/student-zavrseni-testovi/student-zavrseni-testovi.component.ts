@@ -27,7 +27,7 @@ export class StudentZavrseniTestoviComponent implements OnInit{
 
   zavrseniTestovi:StudentTestResp[]=[];
   dohvatiZavrsene(){
-    let url=MojConfig.adresa_servera+`/Testovi/getzavrseni`;
+    let url=MojConfig.adresa_servera+`/Testovi/getzavrseni?studentID=${localStorage.getItem('id')}`;
     this.httpClient.get<StudentTestResp[]>(url).subscribe(x=>{
       this.zavrseniTestovi=x;
     })
