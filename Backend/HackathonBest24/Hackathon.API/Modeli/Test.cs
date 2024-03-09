@@ -14,6 +14,9 @@ namespace Hackathon.API.Modeli
         public bool IsDeleted { get; set; } = false;
 
         public DateTime AktivanDo { get; set; }
+        [ForeignKey(nameof(Razred))]
+        public int RazredId { get; set; }
+        public Razred Razred { get; set; }
         [ForeignKey(nameof(Predmet))]
         public int PredmetId { get; set; }
         public Predmet Predmet { get; set; }
