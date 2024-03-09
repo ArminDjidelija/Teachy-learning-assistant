@@ -13,7 +13,7 @@
   right: 0;
   justify-content: space-between;
   transition-duration: 250ms;
-  overflow: hidden;
+  z-index: 9999;
 }
 #pitanje
 {
