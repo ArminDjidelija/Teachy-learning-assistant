@@ -1,12 +1,18 @@
-<div class="row">
-  <div  class="col-md-4 mb-4" style="text-align: center">
-    <div class="card" style="width: 18rem;" *ngFor="let zavr of zavrseniTestovi">
-      <div class="card-body">
-        <h5 class="card-title">{{zavr.test}}</h5>
-        <div id="btnHolder">
-          <button class="btn btn-success mt-3 w-50">Pogledaj detalje</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">Naziv testa</th>
+    <th scope="col">Datum </th>
+    <th>Broj ostvarenih bodova</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let zavr of zavrseniTestovi">
+    <td>{{zavr.test.predmet.naziv}}</td>
+    <td>{{zavr.test.naziv}}</td>
+    <td>{{zavr.datumPocetka | date}}</td>
+    <td>{{zavr.ukupnoBodova}}</td>
+  </tr>
+  </tbody>
+</table>

@@ -3,14 +3,16 @@ import {HttpClient} from "@angular/common/http";
 import {DialogService} from "../services/dialog-service";
 import {MojConfig} from "../moj-config";
 import {StudentTestResp} from "./get-zavrseni-testovi";
-import {NgForOf} from "@angular/common";
+import {DatePipe, NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-student-zavrseni-testovi',
   standalone: true,
-    imports: [
-        NgForOf
-    ],
+  imports: [
+    NgForOf,
+    DatePipe,
+    NgIf
+  ],
   templateUrl: './student-zavrseni-testovi.component.html',
   styleUrl: './student-zavrseni-testovi.component.css'
 })

@@ -78,7 +78,6 @@ span {
 #sidebar.active .CTAs {
   display: none;
 }
-
 #sidebar.active .sidebar-header strong {
   display: block;
 }

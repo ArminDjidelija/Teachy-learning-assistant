@@ -48,6 +48,7 @@ namespace Hackathon.API.Controllers
                     .StudentiTestovi
                     .Include(x => x.Student)
                     .Include(x => x.Test)
+                    .Include(x=>x.Test.Predmet)
                     .Where(x => x.Zavrsen==true && x.StudentId == student.Id)
                     .ToList();
 
