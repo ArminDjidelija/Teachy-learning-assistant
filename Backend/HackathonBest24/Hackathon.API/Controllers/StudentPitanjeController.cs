@@ -16,33 +16,57 @@ namespace Hackathon.API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> Post([FromBody] VM_Korisnik_Odgovor request)
+		public async Task<ActionResult> Post([FromBody] VM_Korisnik_Response request)
 		{
-			var studentTestID = await _applicationDbContext.StudentiTestovi.Where(s => s.StudentId == request.StudentID && request.StudentID == s.TestId).FirstOrDefaultAsync();
+			var studentTestID = await _applicationDbContext.StudentiTestovi.Where(s => s.StudentId == request.listaKorisnika[0].StudentID && request.listaKorisnika[0].TestID == s.TestId).FirstOrDefaultAsync();
 			if(studentTestID == null)
 			{
 				studentTestID = new StudentiTestovi()
 				{
-					StudentId = request.StudentID,
-					TestId = request.TestID,
+					StudentId = request.listaKorisnika[0].StudentID,
+					TestId = request.listaKorisnika[0].TestID,
 					DatumPocetka = DateTime.Now
 				};
 				_applicationDbContext.Add(studentTestID);
 				_applicationDbContext.SaveChanges();
 			}
-			var noviZapis = new StudentiTestoviOdgovori()
+            var noviZapis = new List<StudentiTestoviOdgovori>();
+            foreach (var item in request.listaKorisnika)
 			{
-				OdgovorId = request.OdgovorID,
-				StudentiTestoviId = studentTestID.Id
-			};
-			_applicationDbContext.Add(noviZapis);
+				if (item != null)
+				{
+                    noviZapis.Add(new StudentiTestoviOdgovori
+                    {
+                        OdgovorId = item.OdgovorID,
+                        StudentiTestoviId = studentTestID.Id
+
+                    });
+                }
+
+			}
+			
+			_applicationDbContext.AddRange(noviZapis);
 			_applicationDbContext.SaveChanges();
-			var obj = _applicationDbContext.StudentiTestoviOdgovori.Include(s=>s.Odgovor).Where(s=>s.Id==noviZapis.Id).FirstOrDefault();
-			obj.Odgovor.Esejsko = request.esejsko;
-			_applicationDbContext.Update(obj);
-			_applicationDbContext.SaveChanges();
-			return Ok(noviZapis);
+			var obj = _applicationDbContext.StudentiTestoviOdgovori.Include(s=>s.Odgovor).Where(s=>s.StudentiTestoviId==studentTestID.Id).ToList();
+            var obj2 = _applicationDbContext.StudentiTestovi.Where(x => x.StudentId == request.listaKorisnika[0].StudentID && x.TestId == request.listaKorisnika[0].TestID).FirstOrDefault();
+            obj2.Zavrsen = true;
+            obj2.DatumZavrsetka = DateTime.Now;
+
+
+
+			_applicationDbContext.UpdateRange(obj);
+
+            _applicationDbContext.SaveChanges();
+
+			
+			
+			return Ok(obj);
 		}
+	}
+
+	public class VM_Korisnik_Response
+	{
+		public List<VM_Korisnik_Odgovor> listaKorisnika { get; set; }
 	}
 	public class VM_Korisnik_Odgovor
 	{

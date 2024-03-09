@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {ListaKorisnika, ListaKorisnikaResponse} from "./studenttest-classes";
 
 @Component({
   selector: 'app-student-test',
@@ -20,11 +21,14 @@ export class StudentTestComponent implements OnInit{
   pitanjaOdgovori:any[] = [];
   trenutnoPitanje: number = 0;
   korisnickiUnos:any[] = [];
-  constructor(private route:ActivatedRoute, private client:HttpClient) {
+  studentitestoviodgovori:ListaKorisnika[]=[];
+  private studentid: number  = 0;
+  esejsko: string="";
+  constructor(private route:ActivatedRoute, private client:HttpClient, private router:Router) {
   }
 
   ngOnInit(): void {
-
+    this.studentid=parseInt(localStorage.getItem("id")!);
     this.testID = Number(this.route.snapshot.paramMap.get('id'));
     this.GetPitanjaIOdgovori();
   }
@@ -37,9 +41,17 @@ export class StudentTestComponent implements OnInit{
     })
   }
 
-  Next() {
+  Next(id:number) {
+    let odgID:number | null=this.studentitestoviodgovori[this.trenutnoPitanje]?.odgovorID;
     if(this.trenutnoPitanje<this.pitanjaOdgovori.length-1)
     {
+      this.studentitestoviodgovori[this.trenutnoPitanje]={
+        studentID:this.studentid,
+        esejsko:this.esejsko,
+        testID:this.testID,
+        odgovorID:id
+      };
+      this.esejsko="";
       this.trenutnoPitanje++;
       console.log(this.pitanjaOdgovori[this.trenutnoPitanje].tekst);
     }
@@ -48,10 +60,45 @@ export class StudentTestComponent implements OnInit{
     }
   }
 
-  Previous() {
+  Previous(id:number) {
+
     if(this.trenutnoPitanje>0)
     {
+      this.studentitestoviodgovori[this.trenutnoPitanje]={
+        studentID:this.studentid,
+        esejsko:this.esejsko,
+        testID:this.testID,
+        odgovorID:id
+      };
+      this.esejsko="";
       this.trenutnoPitanje--;
     }
+  }
+
+  OznaciOdgovor(odgovor: any) {
+    this.studentitestoviodgovori[this.trenutnoPitanje] = {
+      odgovorID:odgovor.id,
+      testID:this.testID,
+      studentID:this.studentid,
+      esejsko:this.esejsko
+    }
+  }
+
+  Zavrsi(id:number) {
+    let odgID:number | null=this.studentitestoviodgovori[this.trenutnoPitanje]?.odgovorID;    this.studentitestoviodgovori[this.trenutnoPitanje]={
+      studentID:this.studentid,
+      esejsko:this.esejsko,
+      testID:this.testID,
+      odgovorID:id}
+    let obj:ListaKorisnikaResponse={
+      listaKorisnika:this.studentitestoviodgovori
+    }
+    this.client.post(`https://localhost:7020/api/StudentPitanje`,obj,{observe:'response'}).subscribe((data)=>{
+      if(data.status==200)
+      {
+        alert("Ispit zavrsen");
+        this.router.navigate(["/student/testovi"]);
+      }
+    })
   }
 }

@@ -19,7 +19,7 @@ namespace Hackathon.API.Controllers
 		public async Task<ActionResult> Get([FromQuery] int Id)
 		{
 			var pitanjaOdgovori = new List<TestPitanjaODgovori>();
-			var test = await _applicationDbContext.TestoviPitanja.Include(x=>x.Pitanje).Where(t=>t.TestId== Id).ToListAsync();
+			var test = await _applicationDbContext.TestoviPitanja.Include(x=>x.Pitanje).Where(t=>t.TestId== Id && t.IsDeleted==false).ToListAsync();
 			foreach (var t in test)
 			{
 				var odgovori = await _applicationDbContext.Odgovor.Where(o=>o.PitanjeId == t.PitanjeId).ToListAsync();
@@ -36,5 +36,7 @@ namespace Hackathon.API.Controllers
 			public Pitanje Pitanje { get; set; }
 			public List<Odgovor> Odgovori { get; set; }
 		}
+
+
 	}
 }

@@ -1,15 +1,16 @@
 <div *ngIf="pitanjaOdgovori" id="main">
   <h1>{{pitanjaOdgovori[trenutnoPitanje].pitanje.tekst}}</h1>
+  <button style="margin-left: 60%" class="btn btn-danger" (click)="Zavrsi(pitanjaOdgovori[trenutnoPitanje].pitanje.id)">Zavrsi</button>
   <div *ngIf="pitanjaOdgovori[trenutnoPitanje].pitanje.tipPitanjaId!=1" id="odgovori">
     <label class="odgovor" *ngFor="let odgovor of pitanjaOdgovori[trenutnoPitanje].odgovori">
-      <input type="radio" name="pitanje">
+      <input type="radio" name="pitanje" (change)="OznaciOdgovor(odgovor)">
       {{odgovor.tekst}}
     </label>
   </div>
-  <textarea *ngIf="pitanjaOdgovori[trenutnoPitanje].pitanje.tipPitanjaId==1" rows="10"></textarea>
+  <textarea [(ngModel)]="esejsko" *ngIf="pitanjaOdgovori[trenutnoPitanje].pitanje.tipPitanjaId==1" rows="10"></textarea>
   <div id="footer">
-    <button (click)="Previous()" class="btn"><<</button>
-    <button (click)="Next()" class="btn">>></button>
+    <button (click)="Previous(pitanjaOdgovori[trenutnoPitanje].pitanje.id)" class="btn"><<</button>
+    <button (click)="Next(pitanjaOdgovori[trenutnoPitanje].pitanje.id)" class="btn">>></button>
   </div>
 </div>
 
