@@ -25,7 +25,7 @@ export class PrijavaComponent {
     if (this.korisnickoIme == 'profesor' && this.lozinka === 'profesor') {
       this.dialogService.openOkDialog("Prijava uspješna!").afterClosed().subscribe(res => {
         if (res == true) {
-          //navigiraj na profu
+          this.router.navigate(['/profesor']);
         }
       });
     } else if (this.korisnickoIme === 'ucenik' && this.lozinka === 'ucenik') {
