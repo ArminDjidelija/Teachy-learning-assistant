@@ -1,0 +1,16 @@
+<div *ngIf="pitanjaOdgovori" id="main">
+  <h1>{{pitanjaOdgovori[trenutnoPitanje].pitanje.tekst}}</h1>
+  <div *ngIf="pitanjaOdgovori[trenutnoPitanje].pitanje.tipPitanjaId!=1" id="odgovori">
+    <label class="odgovor" *ngFor="let odgovor of pitanjaOdgovori[trenutnoPitanje].odgovori">
+      <input type="radio" name="pitanje">
+      {{odgovor.tekst}}
+    </label>
+  </div>
+  <textarea *ngIf="pitanjaOdgovori[trenutnoPitanje].pitanje.tipPitanjaId==1" rows="10"></textarea>
+  <div id="footer">
+    <button (click)="Previous()" class="btn"><<</button>
+    <button (click)="Next()" class="btn">>></button>
+  </div>
+</div>
+
+

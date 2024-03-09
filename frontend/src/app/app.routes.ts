@@ -6,13 +6,14 @@ import {TestoviStudentComponent} from "./testovi-student/testovi-student.compone
 import {ProfesorPageComponent} from "./profesor-page/profesor-page.component";
 import {ProfesorPitanjaComponent} from "./profesor-pitanja/profesor-pitanja.component";
 import {ProfesorMaterijaliComponent} from "./profesor-materijali/profesor-materijali.component";
+import {StudentTestComponent} from "./student-test/student-test.component";
 
 export const routes: Routes = [
   {path:'', component:LandingPageComponent, pathMatch:'full'},
   {path:'login', component:PrijavaComponent},
   {path:'student', component:StudentPageComponent, children:[
       {path:'testovi', component:TestoviStudentComponent},
-
+      {path:'test/:id', component: StudentTestComponent}
     ]},
   {path:'profesor', component:ProfesorPageComponent,children:[
       {path:'pitanjaprofesor',component:ProfesorPitanjaComponent},

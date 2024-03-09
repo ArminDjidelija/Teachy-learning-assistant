@@ -7,6 +7,7 @@ import {MojConfig} from "../moj-config";
 import {HttpClient} from "@angular/common/http";
 import {diagnose} from "@angular-devkit/build-angular/src/tools/esbuild/angular/compilation/parallel-worker";
 import {AuthLoginResponse} from "./auth-login-response";
+import {virtualManagerService} from "../services/virtualManager-service";
 
 @Component({
   selector: 'app-prijava',
@@ -42,7 +43,7 @@ export class PrijavaComponent {
       }
       localStorage.setItem('id', x.id.toString());
       localStorage.setItem('uloga', x.uloga.toString());
-
+      virtualManagerService.showVirtualManager = true;
     }), error => {
       this.dialogService.openOkDialog("Pogrešan username/password!")
     });

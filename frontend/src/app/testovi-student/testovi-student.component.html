@@ -6,7 +6,7 @@
         <p class="card-text">{{test.predmet.naziv}}</p>
         <p class="card-text">{{test.profesor.ime}} {{test.profesor.prezime}}</p>
         <div id="btnHolder">
-          <button class="btn btn-success mt-3 w-50">Pokreni test</button>
+          <button (click)="virtualManagerService.showVirtualManager=false" [routerLink]="['/student/test/'+test.id]" class="btn btn-success mt-3 w-50">Pokreni test</button>
         </div>
       </div>
     </div>
