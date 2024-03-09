@@ -25,7 +25,13 @@ namespace Hackathon.API.Controllers
             var openAi = new OpenAIAPI(new APIAuthentication(openaiKey));
             var conversation = openAi.Chat.CreateConversation();
 
-            conversation.AppendUserInput(request.Request);
+            var requestGpt = $"Zamisli da si skolski nastavnik koji odgovara ucenicima na pitanja. " +
+                        $"Odgovaraj samo na pitanja vezana za skolu i nastavu, a ostala nemoj dozvoliti niti odgovarati. " +
+                        $"Ovo je request koji salje moj korisnik preko apija: {request.Request} " +
+                        $"Zavrsilo je ono sto ti je korisnik slao. " +
+                        $"Odgovaraj u zanimljivoj formi, i nemoj prevelike odgovore osim ako to korisnik ne zahtijeva od tebe suprotno.";
+
+            conversation.AppendUserInput(requestGpt);
             var response = await conversation.GetResponseFromChatbotAsync();
 
             return Ok(new VirtuelniMentorResponse()
