@@ -1,17 +1,23 @@
 <div class="row">
-  <div *ngFor="let raz of razred" class="col-md-4 mb-4" style="text-align: center">
+  <div *ngFor="let pod of podaci" class="col-md-4 mb-4" style="text-align: center">
     <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h2 class="card-title">Broj ucenika u razredu: {{raz.brojUcenika}}</h2>
-        <p class="card-text">Razred: {{raz.naziv}}</p>
-
+      <div class="card-body" (load)="createChart(pod.prosjecnaProlaznost,pod.brojStudenata,pod.testId.ukupnoBodova)">
+        <h2 class="card-text">Naziv predmeta: {{pod.testId.predmet.naziv}}</h2>
+        <h3 class="card-title">Broj ucenika u razredu: {{pod.brojStudenata}}</h3>
+        <p class="card-text">Naziv testa: {{pod.testId.naziv}}</p>
+        <div id="btnHolder">
+          <button class="btn btn-success mt-3 w-50" (click)="createChart(pod.prosjecnaProlaznost, pod.brojStudenata,
+          pod.testId.ukupnoBodova)">
+            Prikaži chart
+          </button>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="col-md-8 mb-4 d-flex align-items-end justify-content-end">
     <div class="chart mb-0" style="width: 70%; height: 200px;">
-      <canvas id="vrijeme"></canvas>
+      <canvas id="prolaznost"></canvas>
     </div>
   </div>
 </div>
