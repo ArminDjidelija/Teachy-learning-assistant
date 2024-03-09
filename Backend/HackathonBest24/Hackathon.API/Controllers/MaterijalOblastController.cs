@@ -1,4 +1,5 @@
-﻿using Hackathon.API.Modeli;
+﻿using Hackathon.API.Helper;
+using Hackathon.API.Modeli;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -49,13 +50,19 @@ namespace Hackathon.API.Controllers
                 }
 
                 _applicationDbContext.SaveChanges();
-                return Ok();
+                var pdfToText = PdfToWord.ConvertToString(fileName, _environment);
+                return Ok(new Response() { Tekst=pdfToText});
 
             }
 
             return BadRequest();
         }
 
+    }
+
+    public class Response
+    {
+        public string Tekst { get; set; }
     }
 
     public class AddSlikaBody
