@@ -86,7 +86,10 @@ export class ProfesorMaterijaliComponent implements OnInit {
     let url=MojConfig.adresa_servera+`/MaterijalOblast`;
 
     this.httpClient.post(url, formData, {headers}).subscribe(x=>{
-      //this.dohvatiPredmete();
+      this.dohvatiPredmete();
+      this.dialogService.openOkDialog("Uspješno dodan materijal!").afterClosed().subscribe(x=>{
+        this.ucitajOblast(this.odabranaOblast);
+      });
     })
   }
 

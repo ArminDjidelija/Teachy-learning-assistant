@@ -49,11 +49,11 @@ namespace Hackathon.API.Controllers
                 }
 
                 _applicationDbContext.SaveChanges();
-                return Ok("Uspjesno spasen fajl!");
+                return Ok();
 
             }
 
-            return BadRequest("Neki problem je bio");
+            return BadRequest();
         }
 
     }
