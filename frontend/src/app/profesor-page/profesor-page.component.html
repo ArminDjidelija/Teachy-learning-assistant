@@ -184,6 +184,17 @@
 
       </div>
     </nav>
+    <div class="container">
+      <div class="row">
+        <div *ngFor="let r of razred" class="col-md-4 mb-4" style="text-align: center" >
+          <div class="card" style="width: 8rem; height: 8rem; padding-top: 2rem;  display: flex; justify-content: center; align-items: center;">
+            <div class="card-body">
+              <h1 style="text-align: center;">{{r.razredBroj}}-{{r.razredKlasa}}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <router-outlet>    </router-outlet>
 
