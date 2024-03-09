@@ -1,0 +1,29 @@
+#main
+{
+  margin: 10px;
+  width: 25%;
+  height: 15%;
+  background-color: #e0dede;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 10px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  justify-content: space-between;
+  transition-duration: 250ms;
+}
+textarea
+{
+  border-radius: 10px;
+  background-color: #bbb9b9;
+  color: black;
+  border: none;
+  padding: 20px;
+  resize: none;
+}
+p
+{
+  overflow: auto;
+}
