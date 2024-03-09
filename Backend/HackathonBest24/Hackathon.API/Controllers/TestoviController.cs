@@ -35,5 +35,25 @@ namespace Hackathon.API.Controllers
 
             return Ok();
         }
+
+        [HttpGet("getzavrseni")]
+        public async Task<ActionResult> GetZavrseni()
+        {
+            var student = _applicationDbContext.Student.First();
+
+            if (student != null)
+            {
+                var testovi = _applicationDbContext
+                    .StudentiTestovi
+                    .Include(x => x.Student)
+                    .Include(x=>x.Test)
+                    .Where(x => x.Zavrsen && x.StudentId== student.Id)
+                    .ToList();
+
+                return Ok(testovi);
+            }
+
+            return Ok();
+        }
     }
 }
