@@ -1,6 +1,7 @@
 <div class="row row-cols-md-1 row-cols-sm-1" style="display: flex; justify-content: right">
 
-  <button class="btn btn-success" (click)="OtvoriPitanjeModal()">Kreiraj novo pitanje</button>
+  <button style="margin:5px" class="btn btn-success" (click)="OtvoriPitanjeModal()">Kreiraj novo pitanje</button>
+  <button style="margin:5px" class="btn btn-success" (click)="ToggleGenerisiModal()">Generiši pitanja za oblast</button>
   <div class="col mt-3" *ngFor="let predmet of pitanja" >
     <div class="card" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#addEkipaModal">
       <div class="card-body">
@@ -147,6 +148,72 @@
         <button (click)="pitanjeModal=false;" type="button" class="btn btn-secondary" >Close</button>
         <button type="button" class="btn btn-primary" (click)="SpasiPitanje()" >Save changes</button>
       </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="toggleGenerisanaPitanja && generisanaPitanja.length>0" class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Generisana pitanja</h5>
+        <button type="button" class="btn-close" (click)="toggleGenerisanaPitanja=false;"  aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h2>{{generisanaPitanja[trenutnoPitanje].pitanje.tekst}}</h2>
+        <div id="odgovori">
+          <label class="odgovor form-control" *ngFor="let odgovor of generisanaPitanja[trenutnoPitanje].odgovori">
+            <input disabled="true" type="checkbox" name="pitanje" [checked]="odgovor.tacan">
+            {{odgovor.tekst}}
+          </label>
+        </div>
+      </div>
+      <div id="footer" style="display: flex; justify-content: space-between">
+        <button (click)="Previous()" class="btn"><<</button>
+        <button (click)="Next()" class="btn">>></button>
+      </div>
+
+      <div class="modal-footer">
+        <button (click)="toggleGenerisanaPitanja=false;" type="button" class="btn btn-secondary" >Close</button>
+        <button type="button" class="btn btn-primary" >Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="generisiModal" class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Generator pitanja</h5>
+        <button type="button" class="btn-close" (click)="generisiModal=false;"  aria-label="Close"></button>
+      </div>
+      <div style="padding: 20px">
+        <div class="mb-3">
+          <label class="form-label">Predmet</label>
+          <select class="form-control" [(ngModel)]="predmetid2" (ngModelChange)="PromjenaPredmeta2()">
+            <option   *ngFor="let predmet of predmeti" [value]="predmet.id">{{predmet.naziv}}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Oblast</label>
+          <select class="form-control" [(ngModel)]="odabranaoblast">
+            <option *ngFor="let oblast of oblasti" [value]="oblast.oblast.id">{{oblast.oblast.naziv}}</option>
+          </select>
+        </div>
+
+        <label>Broj pitanja</label>
+        <input type="number" class="form-control" [(ngModel)]="brojPitanjaZaGenerisanje">
+
+        <div class="modal-footer">
+          <button (click)="generisiModal=false;" type="button" class="btn btn-secondary" >Close</button>
+          <button (click)="Generisi()" type="button" class="btn btn-primary" >Generisi</button>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
