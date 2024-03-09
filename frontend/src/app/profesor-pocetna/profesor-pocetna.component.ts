@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
-import {NgForOf, NgIf} from "@angular/common";
+import {DecimalPipe, NgForOf, NgIf} from "@angular/common";
 import Chart from 'chart.js/auto';
 import {MojConfig} from "../moj-config";
 import {GetPodaciByProffRespo} from "./podaci-by-profesor";
+import {Obavijesti, ObavijestiGetResp} from "./profesor-preporuke-get";
 
 @Component({
   selector: 'app-profesor-pocetna',
@@ -12,6 +13,7 @@ import {GetPodaciByProffRespo} from "./podaci-by-profesor";
   imports: [
     NgForOf,
     NgIf,
+    DecimalPipe,
   ],
   templateUrl: './profesor-pocetna.component.html',
   styleUrl: './profesor-pocetna.component.css'
@@ -32,9 +34,11 @@ export class ProfesorPocetnaComponent implements OnInit {
     //this.createChart(pod.prosjecnaProlaznost, pod.brojStudenata);
 
   }
+  btnClicked: boolean=false;
 
   createChart(prosjecnaProlaznost: number, brojStudenata: number, ukupnoBodova: number) {
     console.log(prosjecnaProlaznost, brojStudenata, ukupnoBodova);
+    this.btnClicked=true;
     var myChart = new Chart('prolaznost', {
       type: 'bar',
       data: {
@@ -75,8 +79,18 @@ export class ProfesorPocetnaComponent implements OnInit {
         },
       },
     });
+    this.dohvatiPodatke();
   }
 
+  obavijesti!:string;
+  prolaznost:ObavijestiGetResp[]=[];
+  dohvatiPodatke(){
+    let url=MojConfig.adresa_servera+`/AiPreporukaOblasti`;
+    this.client.get<Obavijesti>(url).subscribe((x=>{
+      this.obavijesti=x.poruka;
+      this.prolaznost=x.podaci
+    }))
+  }
   podaci: GetPodaciByProffRespo[] = [];
 
   UcitajRazrede() {
@@ -86,11 +100,4 @@ export class ProfesorPocetnaComponent implements OnInit {
     })
   }
 
-  otvoriModal() {
-    this.otvorenModal = true;
-  }
-
-  zatvoriModal() {
-    this.otvorenModal = false;
-  }
 }

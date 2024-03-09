@@ -1,7 +1,7 @@
 <div class="row">
   <div *ngFor="let pod of podaci" class="col-md-4 mb-4" style="text-align: center">
     <div class="card" style="width: 18rem;">
-      <div class="card-body" (load)="createChart(pod.prosjecnaProlaznost,pod.brojStudenata,pod.testId.ukupnoBodova)">
+      <div class="card-body">
         <h2 class="card-text">Naziv predmeta: {{pod.testId.predmet.naziv}}</h2>
         <h3 class="card-title">Broj ucenika u razredu: {{pod.brojStudenata}}</h3>
         <p class="card-text">Naziv testa: {{pod.testId.naziv}}</p>
@@ -20,4 +20,19 @@
       <canvas id="prolaznost"></canvas>
     </div>
   </div>
+</div>
+<div style="border: 1px solid grey; border-radius: 10px; margin:5px;padding: 5px">
+  {{obavijesti}}
+</div>
+<div *ngIf="btnClicked">
+</div>
+<div *ngFor="let prol of prolaznost" style="border: 1px solid grey; border-radius: 10px; margin:5px;padding: 5px">
+  <div *ngIf="prol.prosjecnaTacnost<40">
+    <span class="text-danger bi bi-exclamation-triangle">
+      Poraditi na ovoj oblasti!
+    </span>
+  </div>
+  <h3>Oblast: {{prol.oblastName}}</h3>
+  <p>Prosječna tačnost: {{prol.prosjecnaTacnost | number:'1.2-2'}} %</p>
+
 </div>
