@@ -1,0 +1,12 @@
+<div class="row">
+  <div *ngFor="let predmet of predmeti" class="col-md-4 mb-4" style="text-align: center">
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{predmet.naziv}}</h5>
+        <div id="btnHolder">
+          <button class="btn btn-success mt-3 w-50">Pogledaj detalje</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

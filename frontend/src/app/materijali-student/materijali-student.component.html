@@ -1,1 +1,30 @@
-<p>materijali-student works!</p>
+<div class="container mt-5">
+  <div class="mb-3">
+    <label for="exampleCombobox" class="form-label">Odaberite predmet:</label>
+    <select class="form-select" id="exampleCombobox" [(ngModel)]="odabraniPredmet"
+    (change)="ucitajOblast(odabraniPredmet)">
+      <option *ngFor="let pred of predmeti" [value]="pred.id">{{pred.naziv}}</option>
+    </select>
+  </div>
+</div>
+
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">Naziv oblasti</th>
+    <th scrope="col">Fajl</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let obl of oblasti">
+    <td>{{obl.oblast.naziv}}</td>
+    <td>
+  <span>
+    <a [href]="obl.fileUrl">{{obl.oblast.nazivFajla}}</a>
+  </span>
+    </td>
+
+  </tr>
+  </tbody>
+</table>
