@@ -3,6 +3,8 @@ import {ActivatedRoute, Router, RouterOutlet} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {Chart} from "chart.js";
+import {DialogService} from "../services/dialog-service";
 
 @Component({
   selector: 'app-profesor-pitanja',
@@ -46,7 +48,8 @@ export class ProfesorPitanjaComponent implements OnInit {
   predmetid2: number = 0;
   brojPitanjaZaGenerisanje: number = 0;
 
-  constructor(private client:HttpClient, private route: ActivatedRoute, private router:Router) {
+  constructor(private client:HttpClient, private route: ActivatedRoute, private router:Router,
+              private dialogService:DialogService) {
   }
 
 
@@ -55,8 +58,8 @@ export class ProfesorPitanjaComponent implements OnInit {
     this.UcitajPitanja();
     this.UcitajTipove();
     this.UcitajPredmete();
-
   }
+
 
   private UcitajPitanja() {
     this.client.get(`https://localhost:7020/PitanjaByPredmet`,{observe:'response'}).subscribe((data)=>{
@@ -141,7 +144,7 @@ export class ProfesorPitanjaComponent implements OnInit {
     this.client.post(`https://localhost:7020/Pitanje`,obj,{observe:'response'}).subscribe((data)=>{
       if(data.status==200)
       {
-        alert("Uspjesno dodano")
+        this.dialogService.openOkDialog("Uspješno dodavanje!");
       }
     })
   }
@@ -160,7 +163,7 @@ export class ProfesorPitanjaComponent implements OnInit {
     this.client.post(`https://localhost:7020/Odgovori`,obj,{observe:'response'}).subscribe((data)=>{
       if(data.status==200)
       {
-        alert("Uspjesno dodan odgovor");
+        this.dialogService.openOkDialog("Uspješno dodan odgovor!");
         this.UcitajOdgovore(this.odabranoPitanje.id);
       }
     })
@@ -170,7 +173,7 @@ export class ProfesorPitanjaComponent implements OnInit {
     this.client.delete(`https://localhost:7020/Odgovori?id=${id}`,{observe:'response'}).subscribe((data)=>{
       if(data.status==200)
       {
-        alert("Uspjesno obrisano");
+        this.dialogService.openOkDialog("Uspješno obrisano!");
         this.UcitajOdgovore(this.odabranoPitanje.id);
       }
     })
@@ -180,7 +183,7 @@ export class ProfesorPitanjaComponent implements OnInit {
     this.client.delete(`https://localhost:7020/Pitanje?id=${id}`,{observe:'response'}).subscribe((data)=>{
       if(data.status==200)
       {
-        alert("Uspjseno obrisano");
+        this.dialogService.openOkDialog("Uspješno obrisano!");
         this.UcitajPitanja();
       }
     })
