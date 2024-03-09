@@ -7,6 +7,7 @@ import {ProfesorPageComponent} from "./profesor-page/profesor-page.component";
 import {ProfesorPitanjaComponent} from "./profesor-pitanja/profesor-pitanja.component";
 import {ProfesorTestoviComponent} from "./profesor-testovi/profesor-testovi.component";
 import {ProfesorMaterijaliComponent} from "./profesor-materijali/profesor-materijali.component";
+import {ProfesorPocetnaComponent} from "./profesor-pocetna/profesor-pocetna.component";
 
 export const routes: Routes = [
   {path:'', component:LandingPageComponent, pathMatch:'full'},
@@ -19,6 +20,7 @@ export const routes: Routes = [
       {path:'pitanjaprofesor',component:ProfesorPitanjaComponent},
       {path:'testoviprofesor',component:ProfesorTestoviComponent},
       {path:'materijali', component:ProfesorMaterijaliComponent},
+      {path:'pocetna',component: ProfesorPocetnaComponent}
 
 
     ]},
