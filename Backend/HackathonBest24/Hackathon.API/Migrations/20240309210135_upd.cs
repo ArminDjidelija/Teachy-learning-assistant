@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Hackathon.API.Migrations
 {
     /// <inheritdoc />
-    public partial class mig : Migration
+    public partial class upd : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -321,10 +321,10 @@ namespace Hackathon.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UkupnoBodova = table.Column<int>(type: "int", nullable: false),
+                    UkupnoBodova = table.Column<int>(type: "int", nullable: true),
                     DatumPocetka = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DatumZavrsetka = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Zavrsen = table.Column<bool>(type: "bit", nullable: false),
+                    DatumZavrsetka = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Zavrsen = table.Column<bool>(type: "bit", nullable: true),
                     TestId = table.Column<int>(type: "int", nullable: false),
                     StudentId = table.Column<int>(type: "int", nullable: false)
                 },

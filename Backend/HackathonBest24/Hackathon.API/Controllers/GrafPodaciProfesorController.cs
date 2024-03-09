@@ -21,6 +21,7 @@ namespace Hackathon.API.Controllers
             var studentTestovi = _applicationDbContext.StudentiTestovi
                 .Include(x => x.Student)
                 .Include(x => x.Test)
+                .Include(x=>x.Test.Predmet)
                 .Where(x => x.Test.ProfesorId == profesorId)
                 .ToList();
 
@@ -30,7 +31,7 @@ namespace Hackathon.API.Controllers
                        {
                            TestId = group.Key,
                            BrojStudenata = group.Count(),
-                           ProsječnaProlaznost = Math.Round(group.Count(st => (double)st.UkupnoBodova / st.UkupnoBodova > 0.4) / (double)group.Count() * 100, 1)
+                           ProsjecnaProlaznost = Math.Round(group.Count(st => (double)st.UkupnoBodova / st.UkupnoBodova > 0.4) / (double)group.Count() * 100, 1)
                        });
 
             return Ok(rezultatiTestova);
