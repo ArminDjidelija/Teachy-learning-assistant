@@ -46,6 +46,9 @@ export class ProfesorTestoviComponent implements OnInit{
   public pitanja:any;
   oblastid: number|undefined;
   pitanjadodana: any;
+  otvoriTestoviModal: boolean=false;
+  studentitestovi:any;
+
   getTestovi(){
     var url = MojConfig.adresa_servera+'/Testovi';
     return this.http.get<Test>(url).subscribe(x=>{
@@ -157,6 +160,26 @@ export class ProfesorTestoviComponent implements OnInit{
         this.dialogService.openOkDialog("Uspješno obrisano!");
         this.UcitajDodana();
       }
+    })
+  }
+
+  OtvoriTestove(id:number) {
+    this.otvoriTestoviModal=true;
+    this.UcitajTestoveStudente(id);
+  }
+
+  private UcitajTestoveStudente(id: number) {
+    this.http.get(`https://localhost:7020/TestoviStudent/GetByStudTest?testid=${id}`,{observe:'response'}).subscribe((data)=>{
+      if(data.status==200)
+      {
+        this.studentitestovi=data.body;
+      }
+    })
+  }
+
+  Ocijeni(id:number) {
+    this.http.put(`https://localhost:7020/api/TestoviStudentOdgovori?teststudentid=${id}`,1,{observe:'response'}).subscribe((data)=>{
+
     })
   }
 }

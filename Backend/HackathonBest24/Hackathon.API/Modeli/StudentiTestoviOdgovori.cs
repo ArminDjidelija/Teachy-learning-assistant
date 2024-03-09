@@ -14,5 +14,6 @@ namespace Hackathon.API.Modeli
         [ForeignKey(nameof(Odgovor))]
         public int? OdgovorId { get; set; }
         public Odgovor Odgovor{ get; set; }
+
     }
 }

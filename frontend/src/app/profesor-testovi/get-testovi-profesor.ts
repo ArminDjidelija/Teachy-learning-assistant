@@ -1,4 +1,4 @@
-export type Testovi = Test[]
+
 
 export interface Test {
   id: number
@@ -30,3 +30,5 @@ export interface Profesor {
   email: string
   lozinka: string
 }
+
+

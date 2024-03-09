@@ -49,7 +49,7 @@ namespace Hackathon.API.Controllers
 			_applicationDbContext.SaveChanges();
 			var obj = _applicationDbContext.StudentiTestoviOdgovori.Include(s=>s.Odgovor).Where(s=>s.StudentiTestoviId==studentTestID.Id).ToList();
             var obj2 = _applicationDbContext.StudentiTestovi.Where(x => x.StudentId == request.listaKorisnika[0].StudentID && x.TestId == request.listaKorisnika[0].TestID).FirstOrDefault();
-            obj2.Zavrsen = true;
+
             obj2.DatumZavrsetka = DateTime.Now;
 
 

@@ -34,5 +34,25 @@ namespace Hackathon.API.Controllers
 
             return Ok();
         }
+
+        [HttpGet("GetByStudTest")]
+        public async Task<ActionResult> GetById([FromQuery] int testid)
+        {
+            var studentitestovi = _applicationDbContext.StudentiTestovi.Include(x => x.Student).Include(x => x.Test).Where(x => x.TestId == testid).Select(x => new
+            {
+                Id=x.Id,
+                ImePrezime = x.Student.Ime + " " + x.Student.Prezime,
+                NazivTesta=x.Test.Naziv,
+                DatumPocetka=x.DatumPocetka,
+                DatumZavrsetka=x.DatumZavrsetka,
+                UkupnoBodova=x.Test.UkupnoBodova
+            }).ToList();
+        
+            if(studentitestovi != null)
+            {
+                return Ok(studentitestovi);
+            }
+            return NotFound();
+        }
     }
 }

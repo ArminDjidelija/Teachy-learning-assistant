@@ -37,6 +37,7 @@
         <th>{{t.razredId}}</th>
         <th>{{t.predmet.naziv}}</th>
         <th><button class="btn btn-primary" (click)="DodajPitanja(t.id)">Pitanja</button>
+          <button style="margin-left: 10px"  class="btn btn-primary" (click)="OtvoriTestove(t.id)">Testovi</button>
             <button style="margin-left: 10px" (click)="ObrisiTest(t.id)" class="btn btn-danger">Obrisi</button></th>
       </tr>
       </tbody>
@@ -44,7 +45,7 @@
   </div>
 </div>
 
-<div *ngIf="otvoriDijalog"  class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+<div *ngIf="otvoriDijalog" style="width: 700px"  class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -84,6 +85,56 @@
       <div class="modal-footer">
         <button type="button" (click)="otvoriDijalog=false" class="btn btn-secondary" >Zatvori</button>
         <button type="button" class="btn btn-primary" (click)="KreirajTest()">Spasi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="otvoriTestoviModal" class="modal fade show" id="exampleModalLive4" tabindex="-1" aria-labelledby="exampleModalLiveLabel4" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel4">Novi odgovor </h5>
+        <button type="button" class="btn-close" (click)="otvoriTestoviModal=false;"  aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th style="width: 10%">Ime i prezime</th>
+              <th style="width: 70%">Naziv testa</th>
+              <th style="width: 10%">Datum Pocetka</th>
+              <th style="width: 10%">Datum Zavrsetka</th>
+              <th style="width: 10%">Bodovi</th>
+              <th style="width: 10%">Akcija</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let stdtest of studentitestovi; " >
+              <td>{{stdtest.imePrezime}}</td>
+              <td>{{stdtest.nazivTesta}}</td>
+              <td>{{stdtest.datumPocetka}}</td>
+              <td>{{stdtest.datumZavrsetka}}</td>
+              <td>{{stdtest.ukupnoBodova}}</td>
+              <td><button class="btn btn-primary" (click)="Ocijeni(stdtest.id)">Ocijeni</button></td>
+
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+
+        <div class="mb-3">
+          <button class="btn btn-primary" >Spremi odgovor</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button (click)="otvoriTestoviModal=false;" type="button" class="btn btn-secondary" >Close</button>
+        <button type="button" class="btn btn-primary" >Save changes</button>
       </div>
     </div>
   </div>
