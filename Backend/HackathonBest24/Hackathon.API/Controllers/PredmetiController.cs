@@ -25,20 +25,6 @@ namespace Hackathon.API.Controllers
             return Ok(predmeti);
         }
 
-        [HttpGet("{profesorId}")]
-        public async Task<ActionResult> GetByProfesorId([FromRoute]int profesorId)
-        {
-            var podaci=_applicationDbContext
-                .ProfesoriPredmeti
-                .Include(x=>x.Predmet)
-                .Include(x=>x.Profesor)
-                .Where(x=>x.ProfesorId==profesorId)
-                .ToList();
 
-            var predmeti = new List<Predmet>();
-            foreach(var predmet in podaci) { predmeti.Add(predmet.Predmet); }
-
-            return Ok(predmeti);
-        }
     }
 }

@@ -24,7 +24,7 @@
               <td>{{pit.naziv}}</td>
               <td>{{pit.oblast}}</td>
               <td><button (click)="OtvoriModalOdgovori(pit)" type="button" class="btn btn-primary" >Odgovori</button>
-              <button style="margin-left: 5px" class="btn btn-danger">Obrisi</button></td>
+              <button style="margin-left: 5px" class="btn btn-danger" (click)="ObrisiPitanje(pit.id)">Obrisi</button></td>
 
 
             </tr>
@@ -65,7 +65,7 @@
               <td *ngIf="odg.tekst">{{ odg.tekst }}</td>
               <td *ngIf="odg.esejsko">{{ odg.esejsko }}</td>
               <td>{{odg.tacan}}</td>
-              <td> <button style="margin-left: 5px" class="btn btn-danger">Obrisi</button></td>
+              <td> <button style="margin-left: 5px" class="btn btn-danger" (click)="ObrisiOdgovor(odg.id)">Obrisi</button></td>
 
 
             </tr>
@@ -73,35 +73,23 @@
             </tbody>
           </table>
         </div>
-        <div class="mb-3">
+        <div *ngIf="odabranoPitanje.tipPitanjaId!=1"  class="mb-3">
           <label class="form-label">Tekst odgovora</label>
-          <input class="form-control" type="text"  placeholder="Odgovor">
+          <input class="form-control" type="text"  placeholder="Odgovor" [(ngModel)]="tekstOdgovoraPravi">
         </div>
-        <div class="mb-3">
+
           <label class="form-label">Tacan</label>
-          <input class="form-control" type="radio"  placeholder="Bodovi">
-        </div>
-        <div class="mb-3">
+          <input style="margin-left:5px" type="checkbox" [checked]="tacanodgovor" (change)="Klik()" >
+
+        <div *ngIf="odabranoPitanje.tipPitanjaId==1" class="mb-3">
           <label class="form-label">Esejsko</label>
-          <input class="form-control" type="text"  placeholder="Odgovor">
+          <input class="form-control" type="text"  placeholder="Odgovor" [(ngModel)]="esejsko">
         </div>
 
-        <div class="mb-3">
-          <label class="form-label">Oblast</label>
-          <select class="form-control" >
-            <option *ngFor="let oblast of oblasti" [value]="oblast.id">{{oblast.naziv}}</option>
-          </select>
-        </div>
+
 
         <div class="mb-3">
-          <label class="form-label">Tip pitanja</label>
-          <select class="form-control" >
-            <option *ngFor="let tip of tipovipitanja" [value]="tip.id">{{tip.naziv}}</option>
-          </select>
-        </div>
-
-        <div class="mb-3">
-          <button class="btn btn-primary">Spremi odgovor</button>
+          <button class="btn btn-primary" (click)="SpremiOdgovor()">Spremi odgovor</button>
         </div>
       </div>
       <div class="modal-footer">
@@ -125,42 +113,39 @@
 
         </div>
         <div class="mb-3">
-          <label class="form-label">Tekst odgovora</label>
-          <input class="form-control" type="text"  placeholder="Odgovor">
+          <label class="form-label">Tekst pitanja</label>
+          <input class="form-control" type="text"  placeholder="Pitanje" [(ngModel)]="tekstOdgovora">
         </div>
         <div class="mb-3">
           <label class="form-label">Broj bodova</label>
-          <input class="form-control" type="number"  placeholder="Bodovi">
+          <input class="form-control" type="number"  placeholder="Bodovi" [(ngModel)]="bodovi">
         </div>
 
         <div class="mb-3">
           <label class="form-label">Predmet</label>
-          <select class="form-control" >
-            <option *ngFor="let oblast of oblasti" [value]="oblast.id">{{oblast.naziv}}</option>
+          <select class="form-control" [(ngModel)]="predmetid" (ngModelChange)="PromjenaPredmeta()">
+            <option id="selectpredmet"  *ngFor="let predmet of predmeti" [value]="predmet.id">{{predmet.naziv}}</option>
           </select>
         </div>
 
         <div class="mb-3">
           <label class="form-label">Oblast</label>
-          <select class="form-control" >
-            <option *ngFor="let oblast of oblasti" [value]="oblast.id">{{oblast.naziv}}</option>
+          <select class="form-control" [(ngModel)]="odabranaoblast">
+            <option *ngFor="let oblast of oblasti" [value]="oblast.oblast.id">{{oblast.oblast.naziv}}</option>
           </select>
         </div>
 
         <div class="mb-3">
           <label class="form-label">Tip pitanja</label>
-          <select class="form-control" >
+          <select class="form-control" [(ngModel)]="odabranitip" >
             <option *ngFor="let tip of tipovipitanja" [value]="tip.id">{{tip.naziv}}</option>
           </select>
         </div>
 
-        <div class="mb-3">
-          <button class="btn btn-primary">Spremi odgovor</button>
-        </div>
       </div>
       <div class="modal-footer">
         <button (click)="pitanjeModal=false;" type="button" class="btn btn-secondary" >Close</button>
-        <button type="button" class="btn btn-primary" >Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="SpasiPitanje()" >Save changes</button>
       </div>
     </div>
   </div>
