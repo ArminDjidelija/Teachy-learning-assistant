@@ -15,6 +15,7 @@ namespace Hackathon.API.Controllers
             _applicationDbContext = applicationDbContext;
         }
 
+        [HttpGet]
         public async Task<ActionResult> Get()
         {
             var profesor=_applicationDbContext.Profesor.First();
