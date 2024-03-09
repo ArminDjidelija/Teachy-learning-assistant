@@ -3,14 +3,15 @@ import {HttpClient} from "@angular/common/http";
 import {MojConfig} from "../moj-config";
 import {Razred} from "../profesor-page/get-razredi-profesor";
 import {Test} from "./get-testovi-profesor";
-import {DatePipe, NgForOf} from "@angular/common";
+import {CommonModule, DatePipe, NgForOf} from "@angular/common";
 declare function init_plugin():any;
 @Component({
   selector: 'app-profesor-testovi',
   standalone: true,
   imports: [
     NgForOf,
-    DatePipe
+    DatePipe,
+    CommonModule
   ],
   templateUrl: './profesor-testovi.component.html',
   styleUrl: './profesor-testovi.component.css'
@@ -22,6 +23,7 @@ export class ProfesorTestoviComponent {
     init_plugin();
     this.getTestovi();
   }
+  otvoriDijalog:boolean=false;
   test:any;
   getTestovi(){
     var url = MojConfig.adresa_servera+'/Testovi';

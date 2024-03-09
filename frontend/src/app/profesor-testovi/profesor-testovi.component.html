@@ -9,12 +9,12 @@
         </div>
       </div>
       <div class="col-md-6">
-        <button class="btn btn-primary float-right">Kreiraj test</button>
+        <button (click)="otvoriDijalog=true;" class="btn btn-primary float-right">Kreiraj test</button>
       </div>
     </div>
   </div>
-  <div class="container">
-    <table class="table">
+  <div class="container" style="padding-bottom: 25rem">
+    <table class="table" >
       <thead>
       <tr>
         <th>Br</th>
@@ -38,5 +38,48 @@
       </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+<div *ngIf="otvoriDijalog"  class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">Kreiranje novog testa </h5>
+        <button type="button" (click)="otvoriDijalog=false" class="btn-close" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Naziv</label>
+          <input class="form-control" type="text"  placeholder="Naziv">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Trajanje</label>
+          <input class="form-control" type="number" placeholder="Trajanje"/>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Aktivan do datuma</label>
+          <input class="form-control" type="date" placeholder="Upisi datum MM/DD/YYYY"/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Aktivan do sati</label>
+          <input class="form-control" type="number" min="1" max="24" placeholder="Upisi sate"/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Aktivan do minuta</label>
+          <input class="form-control" type="number" min="1" max="60" placeholder="Upisi minute"/>
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input"  placeholder="Aktivan" />
+          <label class="form-check-label">Aktivan</label>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="otvoriDijalog=false" class="btn btn-secondary" >Close</button>
+        <button type="button" class="btn btn-primary" >Save changes</button>
+      </div>
+    </div>
   </div>
 </div>
