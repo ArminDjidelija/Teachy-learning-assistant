@@ -1,12 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hackathon.API.Modeli
 {
     public class Razred
     {
+        [Key]
         public int Id { get; set; }
         public int RazredBroj { get; set; } //npr 6
         public string RazredKlasa { get; set; } //npr a
+
 
         [ForeignKey(nameof(TipSkole))]
         public int TipSkoleId { get; set; }
