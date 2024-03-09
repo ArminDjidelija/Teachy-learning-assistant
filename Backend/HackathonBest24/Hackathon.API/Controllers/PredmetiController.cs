@@ -50,6 +50,15 @@ namespace Hackathon.API.Controllers
             return Ok(podaci);
         }
 
+        [HttpGet("getall")]
+        public async Task<ActionResult> GetAllKlasike()
+        {
+            var predmeti = _applicationDbContext.Predmet
+                .ToList();
+
+            return Ok(predmeti);
+        }
+
 
     }
 
