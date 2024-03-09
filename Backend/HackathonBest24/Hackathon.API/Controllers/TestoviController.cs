@@ -26,6 +26,7 @@ namespace Hackathon.API.Controllers
                     .Test
                     .Include(x=>x.Predmet)
                     .Include(x=>x.Profesor)
+                    .Include(x=>x.Razred)
                     .Where(x=>x.ProfesorId  == profesor.Id)
                     .ToList();
 
