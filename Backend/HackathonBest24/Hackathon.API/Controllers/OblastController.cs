@@ -18,7 +18,7 @@ namespace Hackathon.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetMaterijali([FromBody]OblastGetDto request)
+        public async Task<ActionResult> GetMaterijali([FromQuery]OblastGetDto request)
         {
             var podaci=_applicationDbContext
                 .Oblast
