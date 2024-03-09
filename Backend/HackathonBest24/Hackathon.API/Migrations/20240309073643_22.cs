@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Hackathon.API.Migrations
 {
     /// <inheritdoc />
-    public partial class prva : Migration
+    public partial class _22 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,7 +34,8 @@ namespace Hackathon.API.Migrations
                     Ime = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Prezime = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Lozinka = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Lozinka = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Logiran = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -74,7 +75,8 @@ namespace Hackathon.API.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PredmetId = table.Column<int>(type: "int", nullable: false)
+                    PredmetId = table.Column<int>(type: "int", nullable: false),
+                    NazivFajla = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -107,38 +109,6 @@ namespace Hackathon.API.Migrations
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_ProfesoriPredmeti_Profesor_ProfesorId",
-                        column: x => x.ProfesorId,
-                        principalTable: "Profesor",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Test",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Aktivan = table.Column<bool>(type: "bit", nullable: false),
-                    Trajanje = table.Column<int>(type: "int", nullable: false),
-                    UkupnoBodova = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    AktivanDo = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PredmetId = table.Column<int>(type: "int", nullable: false),
-                    ProfesorId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Test", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Test_Predmet_PredmetId",
-                        column: x => x.PredmetId,
-                        principalTable: "Predmet",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Test_Profesor_ProfesorId",
                         column: x => x.ProfesorId,
                         principalTable: "Profesor",
                         principalColumn: "Id",
@@ -267,13 +237,54 @@ namespace Hackathon.API.Migrations
                     Prezime = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Lozinka = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RazredId = table.Column<int>(type: "int", nullable: false)
+                    RazredId = table.Column<int>(type: "int", nullable: false),
+                    Logiran = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Student", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Student_Razred_RazredId",
+                        column: x => x.RazredId,
+                        principalTable: "Razred",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Test",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Aktivan = table.Column<bool>(type: "bit", nullable: false),
+                    Trajanje = table.Column<int>(type: "int", nullable: false),
+                    UkupnoBodova = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    Zavrsen = table.Column<bool>(type: "bit", nullable: false),
+                    AktivanDo = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RazredId = table.Column<int>(type: "int", nullable: false),
+                    PredmetId = table.Column<int>(type: "int", nullable: false),
+                    ProfesorId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Test", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Test_Predmet_PredmetId",
+                        column: x => x.PredmetId,
+                        principalTable: "Predmet",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Test_Profesor_ProfesorId",
+                        column: x => x.ProfesorId,
+                        principalTable: "Profesor",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Test_Razred_RazredId",
                         column: x => x.RazredId,
                         principalTable: "Razred",
                         principalColumn: "Id",
@@ -304,33 +315,6 @@ namespace Hackathon.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TestoviPitanja",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    TestId = table.Column<int>(type: "int", nullable: false),
-                    PitanjeId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TestoviPitanja", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TestoviPitanja_Pitanje_PitanjeId",
-                        column: x => x.PitanjeId,
-                        principalTable: "Pitanje",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_TestoviPitanja_Test_TestId",
-                        column: x => x.TestId,
-                        principalTable: "Test",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "StudentiTestovi",
                 columns: table => new
                 {
@@ -354,6 +338,33 @@ namespace Hackathon.API.Migrations
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_StudentiTestovi_Test_TestId",
+                        column: x => x.TestId,
+                        principalTable: "Test",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TestoviPitanja",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    TestId = table.Column<int>(type: "int", nullable: false),
+                    PitanjeId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TestoviPitanja", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TestoviPitanja_Pitanje_PitanjeId",
+                        column: x => x.PitanjeId,
+                        principalTable: "Pitanje",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_TestoviPitanja_Test_TestId",
                         column: x => x.TestId,
                         principalTable: "Test",
                         principalColumn: "Id",
@@ -482,6 +493,11 @@ namespace Hackathon.API.Migrations
                 column: "ProfesorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Test_RazredId",
+                table: "Test",
+                column: "RazredId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TestoviPitanja_PitanjeId",
                 table: "TestoviPitanja",
                 column: "PitanjeId");
@@ -532,10 +548,10 @@ namespace Hackathon.API.Migrations
                 name: "TipPitanja");
 
             migrationBuilder.DropTable(
-                name: "Razred");
+                name: "Profesor");
 
             migrationBuilder.DropTable(
-                name: "Profesor");
+                name: "Razred");
 
             migrationBuilder.DropTable(
                 name: "Predmet");

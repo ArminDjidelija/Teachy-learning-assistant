@@ -5,7 +5,7 @@
 namespace Hackathon.API.Migrations
 {
     /// <inheritdoc />
-    public partial class skriptaZaBazu : Migration
+    public partial class promjenaSifraNaziv : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

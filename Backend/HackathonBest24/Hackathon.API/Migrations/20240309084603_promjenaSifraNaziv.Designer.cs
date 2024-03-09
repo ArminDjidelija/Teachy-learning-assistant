@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hackathon.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240309050901_ispravka")]
-    partial class ispravka
+    [Migration("20240309084603_promjenaSifraNaziv")]
+    partial class promjenaSifraNaziv
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,8 +71,14 @@ namespace Hackathon.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("NazivFajla")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("PredmetId")
                         .HasColumnType("int");
+
+                    b.Property<string>("SifraFajla")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -185,6 +191,9 @@ namespace Hackathon.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Logiran")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Lozinka")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -284,6 +293,9 @@ namespace Hackathon.API.Migrations
                     b.Property<string>("Ime")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Logiran")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Lozinka")
                         .IsRequired()

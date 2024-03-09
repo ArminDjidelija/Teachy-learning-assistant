@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hackathon.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240309055944_dodanIsLogiran")]
-    partial class dodanIsLogiran
+    [Migration("20240309073643_22")]
+    partial class _22
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,6 +69,9 @@ namespace Hackathon.API.Migrations
 
                     b.Property<string>("Naziv")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NazivFajla")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PredmetId")
