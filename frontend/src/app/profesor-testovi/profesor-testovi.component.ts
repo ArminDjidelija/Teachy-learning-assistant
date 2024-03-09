@@ -5,6 +5,7 @@ import {Razred} from "../profesor-page/get-razredi-profesor";
 import {Test} from "./get-testovi-profesor";
 import {CommonModule, DatePipe, NgForOf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {DialogService} from "../services/dialog-service";
 declare function init_plugin():any;
 @Component({
   selector: 'app-profesor-testovi',
@@ -24,7 +25,7 @@ export class ProfesorTestoviComponent implements OnInit{
   private id: number | undefined;
   public razredi: any | null;
   private testid: number|undefined;
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient, private dialogService:DialogService) {
   }
   ngOnInit(): void {
     this.id=parseInt(localStorage.getItem("id")!);
@@ -82,7 +83,7 @@ export class ProfesorTestoviComponent implements OnInit{
     this.http.post(`https://localhost:7020/Testovi`,obj,{observe:'response'}).subscribe((data)=>{
       if(data.status==200)
       {
-        alert("Uspjesno dodano");
+        this.dialogService.openOkDialog("Uspješno dodano!");
         this.getTestovi();
       }
     })
@@ -92,7 +93,7 @@ export class ProfesorTestoviComponent implements OnInit{
     this.http.delete(`https://localhost:7020/Testovi?id=${id}`,{observe:'response'}).subscribe((data)=>{
       if(data.status==200)
       {
-        alert("Uspjesno obrisana")
+        this.dialogService.openOkDialog("Uspješno obrisana!");
         this.getTestovi();
       }
     })
@@ -134,7 +135,7 @@ export class ProfesorTestoviComponent implements OnInit{
     this.http.post(`https://localhost:7020/PitanjaTestovi`,obj,{observe:'response'}).subscribe((data)=>{
       if(data.status==200)
       {
-        alert("Uspjesno dodano")
+        this.dialogService.openOkDialog("Uspješno dodano!");
         this.UcitajDodana();
       }
     })
@@ -153,7 +154,7 @@ export class ProfesorTestoviComponent implements OnInit{
     this.http.delete(`https://localhost:7020/PitanjaTestovi?id=${id}`,{observe:'response'}).subscribe((data)=>{
       if(data.status==200)
       {
-        alert("Uspjesno obrisano");
+        this.dialogService.openOkDialog("Uspješno obrisano!");
         this.UcitajDodana();
       }
     })
