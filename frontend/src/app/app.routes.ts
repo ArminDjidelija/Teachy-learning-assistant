@@ -10,6 +10,7 @@ import {ProfesorMaterijaliComponent} from "./profesor-materijali/profesor-materi
 import {ProfesorPocetnaComponent} from "./profesor-pocetna/profesor-pocetna.component";
 import {MaterijaliStudentComponent} from "./materijali-student/materijali-student.component";
 import {StudentPocetnaComponent} from "./student-pocetna/student-pocetna.component";
+import {StudentZavrseniTestoviComponent} from "./student-zavrseni-testovi/student-zavrseni-testovi.component";
 
 export const routes: Routes = [
   {path:'', component:LandingPageComponent, pathMatch:'full'},
@@ -18,6 +19,7 @@ export const routes: Routes = [
       {path:'testovi', component:TestoviStudentComponent},
       {path:'materijali', component:MaterijaliStudentComponent},
       {path:'pocetna', component:StudentPocetnaComponent},
+      {path:'zavrseni', component:StudentZavrseniTestoviComponent},
 
     ]},
   {path:'profesor', component:ProfesorPageComponent,children:[
