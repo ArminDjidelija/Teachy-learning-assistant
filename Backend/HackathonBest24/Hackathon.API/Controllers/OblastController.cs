@@ -18,7 +18,7 @@ namespace Hackathon.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetMaterijali([FromBody]OblastGetDto request)
+        public async Task<ActionResult> GetMaterijali([FromQuery]OblastGetDto request)
         {
             var podaci=_applicationDbContext
                 .Oblast
@@ -27,7 +27,7 @@ namespace Hackathon.API.Controllers
                 {
                     Predmet=x.Predmet,
                     Oblast=x,
-                    FileUrl= GetFileByPredmet(x.NazivFajla, _environment)
+                    FileUrl= GetFileByPredmet(x.SifraFajla, _environment)
                 }).ToList();
 
             return Ok(podaci);
