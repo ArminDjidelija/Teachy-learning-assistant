@@ -42,5 +42,20 @@ namespace Hackathon.API.Controllers
 
             return Ok(razredi);
         }
+
+        [HttpGet("byProfesor")]
+        public async Task<ActionResult> Get([FromQuery] int id)
+        {
+            var razredi = _applicationDbContext.RazrediProfesor.Include(x=>x.Razred).Where(x=>x.ProfesorId==id).Select(x=>new
+            {
+                Id=x.RazredId,
+                Naziv=x.Razred.RazredBroj,
+                Odjeljenje=x.Razred.RazredKlasa,
+                BrojUcenika = _applicationDbContext.Student.Where(y=>y.RazredId==x.RazredId).Count()
+            }).ToList();
+
+
+            return Ok(razredi);
+        }
     }
 }

@@ -1,0 +1,34 @@
+<div class="container mt-5">
+  <div class="mb-3">
+    <label for="exampleCombobox" class="form-label">Odaberite predmet:</label>
+    <select class="form-select" id="exampleCombobox" [(ngModel)]="odabraniPredmet"
+            (change)="ucitajOblast(odabraniPredmet)">
+      <option *ngFor="let predmet of predmeti" [value]="predmet.id">{{predmet.naziv}}</option>
+    </select>
+  </div>
+</div>
+
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">Naziv oblasti</th>
+    <th scrope="col">Fajl</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let obl of oblasti">
+    <td>{{obl.oblast.naziv}}</td>
+    <td>
+  <span *ngIf="obl.fileUrl">
+    <a [href]="obl.fileUrl">{{obl.oblast.nazivFajla}}</a>
+  </span>
+      <span *ngIf="!obl.fileUrl">
+    <input type="file" (change)="handleFileInput($event)" [multiple]="true" >
+    <button class="btn btn-success" (click)="sendData(obl.oblast.id)" style="margin-left: 5px">Dodaj</button>
+  </span>
+    </td>
+
+  </tr>
+  </tbody>
+</table>

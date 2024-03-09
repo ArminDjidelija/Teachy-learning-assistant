@@ -20,9 +20,12 @@ namespace Hackathon.API.Controllers
         {
             var predmeti = _applicationDbContext
                 .Predmet
+                .OrderBy(x=>x.Naziv)
                 .ToList();
 
             return Ok(predmeti);
         }
+
+
     }
 }

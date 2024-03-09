@@ -1,12 +1,12 @@
 <div class="row row-cols-md-1 row-cols-sm-1" style="display: flex; justify-content: right">
 
-
-  <div class="col" *ngFor="let predmet of pitanja" >
+  <button class="btn btn-success" (click)="OtvoriPitanjeModal()">Kreiraj novo pitanje</button>
+  <div class="col mt-3" *ngFor="let predmet of pitanja" >
     <div class="card" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#addEkipaModal">
       <div class="card-body">
         <h4 class="card-title" style="font-size: x-large; font-weight: bold">{{ predmet.predmetNaziv }}</h4>
         <p class="card-description">
-          <button class="btn btn-success">Kreiraj novo pitanje</button>
+
         </p>
         <div class="table-responsive">
           <table class="table">
@@ -24,7 +24,7 @@
               <td>{{pit.naziv}}</td>
               <td>{{pit.oblast}}</td>
               <td><button (click)="OtvoriModalOdgovori(pit)" type="button" class="btn btn-primary" >Odgovori</button>
-              <button style="margin-left: 5px" class="btn btn-danger">Obrisi</button></td>
+              <button style="margin-left: 5px" class="btn btn-danger" (click)="ObrisiPitanje(pit.id)">Obrisi</button></td>
 
 
             </tr>
@@ -39,12 +39,11 @@
 
 
 </div>
-
 <div *ngIf="odgovoriModal" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLiveLabel">Novi semestar za </h5>
+        <h5 class="modal-title" id="exampleModalLiveLabel">Novi odgovor </h5>
         <button type="button" class="btn-close" (click)="odgovoriModal=false;"  aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -66,7 +65,7 @@
               <td *ngIf="odg.tekst">{{ odg.tekst }}</td>
               <td *ngIf="odg.esejsko">{{ odg.esejsko }}</td>
               <td>{{odg.tacan}}</td>
-              <td> <button style="margin-left: 5px" class="btn btn-danger">Obrisi</button></td>
+              <td> <button style="margin-left: 5px" class="btn btn-danger" (click)="ObrisiOdgovor(odg.id)">Obrisi</button></td>
 
 
             </tr>
@@ -74,36 +73,79 @@
             </tbody>
           </table>
         </div>
-        <div class="mb-3">
+        <div *ngIf="odabranoPitanje.tipPitanjaId!=1"  class="mb-3">
           <label class="form-label">Tekst odgovora</label>
-          <input class="form-control" type="text"  placeholder="Odgovor">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Broj bodova</label>
-          <input class="form-control" type="number"  placeholder="Bodovi">
+          <input class="form-control" type="text"  placeholder="Odgovor" [(ngModel)]="tekstOdgovoraPravi">
         </div>
 
-        <div class="mb-3">
-          <label class="form-label">Oblast</label>
-          <select class="form-control" >
-            <option *ngFor="let oblast of oblasti" [value]="oblast.id">{{oblast.naziv}}</option>
-          </select>
+          <label class="form-label">Tacan</label>
+          <input style="margin-left:5px" type="checkbox" [checked]="tacanodgovor" (change)="Klik()" >
+
+        <div *ngIf="odabranoPitanje.tipPitanjaId==1" class="mb-3">
+          <label class="form-label">Esejsko</label>
+          <input class="form-control" type="text"  placeholder="Odgovor" [(ngModel)]="esejsko">
         </div>
 
-        <div class="mb-3">
-          <label class="form-label">Tip pitanja</label>
-          <select class="form-control" >
-            <option *ngFor="let tip of tipovipitanja" [value]="tip.id">{{tip.naziv}}</option>
-          </select>
-        </div>
+
 
         <div class="mb-3">
-          <button class="btn btn-primary">Spremi odgovor</button>
+          <button class="btn btn-primary" (click)="SpremiOdgovor()">Spremi odgovor</button>
         </div>
       </div>
       <div class="modal-footer">
         <button (click)="odgovoriModal=false;" type="button" class="btn btn-secondary" >Close</button>
         <button type="button" class="btn btn-primary" >Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="pitanjeModal" class="modal fade show" id="pitanjeModale" tabindex="-1" aria-labelledby="pitanjeModal" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="pitanjeModal">Novo pitanje </h5>
+        <button type="button" class="btn-close" (click)="pitanjeModal=false;"  aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="table-responsive">
+
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Tekst pitanja</label>
+          <input class="form-control" type="text"  placeholder="Pitanje" [(ngModel)]="tekstOdgovora">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Broj bodova</label>
+          <input class="form-control" type="number"  placeholder="Bodovi" [(ngModel)]="bodovi">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Predmet</label>
+          <select class="form-control" [(ngModel)]="predmetid" (ngModelChange)="PromjenaPredmeta()">
+            <option id="selectpredmet"  *ngFor="let predmet of predmeti" [value]="predmet.id">{{predmet.naziv}}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Oblast</label>
+          <select class="form-control" [(ngModel)]="odabranaoblast">
+            <option *ngFor="let oblast of oblasti" [value]="oblast.oblast.id">{{oblast.oblast.naziv}}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Tip pitanja</label>
+          <select class="form-control" [(ngModel)]="odabranitip" >
+            <option *ngFor="let tip of tipovipitanja" [value]="tip.id">{{tip.naziv}}</option>
+          </select>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button (click)="pitanjeModal=false;" type="button" class="btn btn-secondary" >Close</button>
+        <button type="button" class="btn btn-primary" (click)="SpasiPitanje()" >Save changes</button>
       </div>
     </div>
   </div>

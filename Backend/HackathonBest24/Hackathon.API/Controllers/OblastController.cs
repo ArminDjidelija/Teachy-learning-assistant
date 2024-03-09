@@ -27,7 +27,7 @@ namespace Hackathon.API.Controllers
                 {
                     Predmet=x.Predmet,
                     Oblast=x,
-                    FileUrl= GetFileByPredmet(x.NazivFajla, _environment)
+                    FileUrl= GetFileByPredmet(x.SifraFajla, _environment)
                 }).ToList();
 
             return Ok(podaci);

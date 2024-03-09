@@ -8,6 +8,5 @@ namespace Hackathon.API.Modeli
         public int Id{ get; set; }
         public string Naziv { get; set; }
         public bool IsDeleted { get; set; } = false;
-
     }
 }

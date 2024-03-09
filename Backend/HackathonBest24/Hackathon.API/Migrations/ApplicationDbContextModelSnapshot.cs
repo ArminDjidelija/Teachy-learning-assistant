@@ -74,6 +74,9 @@ namespace Hackathon.API.Migrations
                     b.Property<int>("PredmetId")
                         .HasColumnType("int");
 
+                    b.Property<string>("SifraFajla")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PredmetId");

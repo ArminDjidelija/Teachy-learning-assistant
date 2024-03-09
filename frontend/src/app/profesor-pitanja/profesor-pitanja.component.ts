@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterOutlet} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {NgForOf, NgIf} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-profesor-pitanja',
@@ -9,7 +10,8 @@ import {NgForOf, NgIf} from "@angular/common";
   imports: [
     RouterOutlet,
     NgForOf,
-    NgIf
+    NgIf,
+    FormsModule
   ],
   templateUrl: './profesor-pitanja.component.html',
   styleUrl: './profesor-pitanja.component.css'
@@ -21,12 +23,28 @@ export class ProfesorPitanjaComponent implements OnInit {
   odgovoriModal: boolean=false;
   odgovori:any;
   oblasti:any;
+  // @ts-ignore
+  public odabranitip: number;
   tipovipitanja:any;
+  pitanjeModal: boolean=false;
+  public id: number | undefined;
+  predmeti:any;
+  odabraniPredmet: any;
+  // @ts-ignore
+  public predmetid: number;
+  odabranaoblast: number|undefined;
+  tekstOdgovora: string |undefined;
+  bodovi: number |undefined;
+  tekstOdgovoraPravi: number|undefined;
+  tacanodgovor: boolean=false;
+  esejsko: string|undefined;
+
   constructor(private client:HttpClient, private route: ActivatedRoute, private router:Router) {
   }
 
 
   ngOnInit(): void {
+    this.id=parseInt(localStorage.getItem("id")!);
     this.UcitajPitanja();
     this.UcitajTipove();
 
@@ -59,8 +77,8 @@ export class ProfesorPitanjaComponent implements OnInit {
     })
   }
 
-  private UcitajOblasti(id:number) {
-    this.client.get(`https://localhost:7020/Oblasti?id=${id}`,{observe:'response'}).subscribe((data)=>{
+  protected UcitajOblasti(id: number) {
+    this.client.get(`https://localhost:7020/Oblast?PredmetId=${id}`,{observe:'response'}).subscribe((data)=>{
       if(data.status==200)
       {
         this.oblasti=data.body;
@@ -73,6 +91,84 @@ export class ProfesorPitanjaComponent implements OnInit {
       if(data.status==200)
       {
         this.tipovipitanja=data.body;
+      }
+    })
+  }
+
+  OtvoriPitanjeModal() {
+    this.UcitajPredmete();
+    this.pitanjeModal=true;
+  }
+
+  private UcitajPredmete() {
+    this.client.get(`https://localhost:7020/GetPredmetiByProfesor?profesorId=${this.id}`,{observe:'response'}).subscribe((data)=>{
+      this.predmeti=data.body;
+    })
+  }
+
+  PromjenaPredmeta() {
+    let id = parseInt((document.getElementById("selectpredmet") as HTMLSelectElement).value);
+    this.client.get(`https://localhost:7020/Oblast?PredmetId=${this.predmetid}`, {observe:'response'}).subscribe((data)=>{
+      if(data.status==200)
+      {
+        this.oblasti=data.body;
+      }
+    })
+  }
+
+  SpasiPitanje() {
+    let obj = {
+      tekst: this.tekstOdgovora,
+      brojBodova: this.bodovi,
+      oblastId: this.odabranaoblast,
+      tipPitanjaId: this.odabranitip,
+      profesorId: this.id
+    }
+
+    this.client.post(`https://localhost:7020/Pitanje`,obj,{observe:'response'}).subscribe((data)=>{
+      if(data.status==200)
+      {
+        alert("Uspjesno dodano")
+      }
+    })
+  }
+
+  Klik() {
+    this.tacanodgovor=!this.tacanodgovor;
+  }
+
+  SpremiOdgovor() {
+    let obj = {
+      tekst: this.tekstOdgovoraPravi,
+      tacan: this.tacanodgovor,
+      esejsko: this.esejsko,
+      pitanjeId: this.odabranoPitanje.id
+    };
+    this.client.post(`https://localhost:7020/Odgovori`,obj,{observe:'response'}).subscribe((data)=>{
+      if(data.status==200)
+      {
+        alert("Uspjesno dodan odgovor");
+        this.UcitajOdgovore(this.odabranoPitanje.id);
+      }
+    })
+  }
+
+  ObrisiOdgovor(id:number) {
+    this.client.delete(`https://localhost:7020/Odgovori?id=${id}`,{observe:'response'}).subscribe((data)=>{
+      if(data.status==200)
+      {
+        alert("Uspjesno obrisano");
+        this.UcitajOdgovore(this.odabranoPitanje.id);
+      }
+    })
+  }
+
+  ObrisiPitanje(id:number) {
+    this.client.delete(`https://localhost:7020/Pitanje?id=${id}`,{observe:'response'}).subscribe((data)=>{
+      if(data.status==200)
+      {
+        alert("Uspjseno obrisano");
+        this.UcitajPitanja();
       }
     })
   }
