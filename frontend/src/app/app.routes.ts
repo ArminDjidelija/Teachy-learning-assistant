@@ -8,6 +8,6 @@ export const routes: Routes = [
   {path:'', component:LandingPageComponent, pathMatch:'full'},
   {path:'login', component:PrijavaComponent},
   {path:'student', component:StudentPageComponent, children:[
-      {path:'testovi', component:TestoviStudentComponent}
+      {path:'testovi', component:TestoviStudentComponent},
     ]},
 ];
