@@ -22,6 +22,7 @@ export class ProfesorPitanjaComponent implements OnInit {
   odgovori:any;
   oblasti:any;
   tipovipitanja:any;
+  pitanjeModal: boolean=false;
   constructor(private client:HttpClient, private route: ActivatedRoute, private router:Router) {
   }
 
@@ -75,5 +76,9 @@ export class ProfesorPitanjaComponent implements OnInit {
         this.tipovipitanja=data.body;
       }
     })
+  }
+
+  OtvoriPitanjeModal() {
+    this.pitanjeModal=true;
   }
 }
