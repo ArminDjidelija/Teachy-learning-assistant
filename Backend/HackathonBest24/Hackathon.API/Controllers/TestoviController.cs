@@ -47,11 +47,15 @@ namespace Hackathon.API.Controllers
                 var testovi = _applicationDbContext
                     .StudentiTestovi
                     .Include(x => x.Student)
-                    .Include(x=>x.Test)
-                    .Where(x => x.Zavrsen && x.StudentId== student.Id)
+                    .Include(x => x.Test)
+                    .Where(x => x.Zavrsen && x.StudentId == student.Id)
                     .ToList();
 
                 return Ok(testovi);
+            }
+            return Ok();
+        }
+
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] InsertTestVM request)
         {
