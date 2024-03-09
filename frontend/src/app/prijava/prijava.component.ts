@@ -2,6 +2,10 @@ import {Component} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DialogService} from "../services/dialog-service";
 import {Router} from "@angular/router";
+import {LoginRequest} from "./login-request";
+import {MojConfig} from "../moj-config";
+import {HttpClient} from "@angular/common/http";
+import {diagnose} from "@angular-devkit/build-angular/src/tools/esbuild/angular/compilation/parallel-worker";
 
 @Component({
   selector: 'app-prijava',
@@ -15,27 +19,26 @@ import {Router} from "@angular/router";
 })
 export class PrijavaComponent {
 
-  constructor(private dialogService: DialogService, private router: Router) {
+  constructor(private dialogService: DialogService, private router: Router,
+              private httpClient:HttpClient) {
   }
 
-  korisnickoIme: string = '';
-  lozinka: string = '';
+  public loginRequest:LoginRequest={
+    lozinka:"",
+    email:"",
+  }
 
   logirajSe() {
-    if (this.korisnickoIme == 'profesor' && this.lozinka === 'profesor') {
-      this.dialogService.openOkDialog("Prijava uspješna!").afterClosed().subscribe(res => {
-        if (res == true) {
-          this.router.navigate(['/profesor']);
+    let url=MojConfig.adresa_servera+`/Login`;
+
+    this.httpClient.post<LoginRequest>(url,this.loginRequest).subscribe((x=>{
+      this.dialogService.openOkDialog("Uspješna prijava!").afterClosed().subscribe(x=>{
+        if(x==true){
+          this.router.navigate(['/'])
         }
-      });
-    } else if (this.korisnickoIme === 'ucenik' && this.lozinka === 'ucenik') {
-      this.dialogService.openOkDialog("Prijava uspješna!").afterClosed().subscribe(res => {
-        if (res == true) {
-          this.router.navigate(['/student']);
-        }
-      });
-    } else if (this.korisnickoIme == "" || this.lozinka == "") {
-      this.dialogService.openOkDialog("Pogrešno korisničko ime/lozinka!");
-    }
+      })
+    }), error => {
+      this.dialogService.openOkDialog("Pogrešan username/password!")
+    });
   }
 }
