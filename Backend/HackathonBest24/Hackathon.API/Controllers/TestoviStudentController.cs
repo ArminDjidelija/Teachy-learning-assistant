@@ -26,7 +26,7 @@ namespace Hackathon.API.Controllers
                     .Test
                     .Include(x=>x.Predmet)
                     .Include(x=>x.Profesor)
-                    .Where(x=>DateTime.Now<x.AktivanDo && x.RazredId==student.RazredId)
+                    .Where(x=>x.RazredId==student.RazredId)
                     .ToList();
 
                 return Ok(testovi);
