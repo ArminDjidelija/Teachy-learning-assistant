@@ -34,6 +34,19 @@ namespace Hackathon.API.Controllers
             return Ok();
         }
 
+        [HttpGet("{oblastId}")]
+        public async Task<ActionResult> GetByOblast([FromRoute]int oblastId)
+        {
+            var podaci=_applicationDbContext
+                .Pitanje
+                .Include(x=>x.Profesor)
+                .Include(x=>x.Oblast)
+                .Where(x=>x.OblastId==oblastId)
+                .ToList();
+
+            return Ok(podaci);
+        }
+
 
         [HttpDelete]
         public async Task<ActionResult> Delete([FromQuery] int id)

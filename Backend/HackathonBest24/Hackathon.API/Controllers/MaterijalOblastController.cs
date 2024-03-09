@@ -30,7 +30,7 @@ namespace Hackathon.API.Controllers
                 //string projekatFolder3 = Directory.GetParent(projekatFolder1).Parent.Parent.FullName;
 
                 //string wwwRootPath = _webHostEnvironment.WebRootPath;
-                string orginalniNaziv=obj.File.Name;
+                string orginalniNaziv=obj.File.FileName;
                 string fileName = Guid.NewGuid().ToString() + Path.GetExtension(obj.File.FileName);
                 string envFile = _environment.WebRootPath + "\\Fajlovi\\Materijali\\" + fileName;
 
@@ -49,11 +49,11 @@ namespace Hackathon.API.Controllers
                 }
 
                 _applicationDbContext.SaveChanges();
-                return Ok();
+                return Ok("Uspjesno spasen fajl!");
 
             }
 
-            return BadRequest();
+            return BadRequest("Neki problem je bio");
         }
 
     }
