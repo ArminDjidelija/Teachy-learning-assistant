@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hackathon.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240309123553_mig")]
-    partial class mig
+    [Migration("20240309210135_upd")]
+    partial class upd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -326,7 +326,7 @@ namespace Hackathon.API.Migrations
                     b.Property<DateTime>("DatumPocetka")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DatumZavrsetka")
+                    b.Property<DateTime?>("DatumZavrsetka")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("StudentId")
@@ -335,10 +335,10 @@ namespace Hackathon.API.Migrations
                     b.Property<int>("TestId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UkupnoBodova")
+                    b.Property<int?>("UkupnoBodova")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Zavrsen")
+                    b.Property<bool?>("Zavrsen")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
@@ -358,7 +358,8 @@ namespace Hackathon.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("OdgovorId")
+                    b.Property<int?>("OdgovorId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("StudentiTestoviId")
