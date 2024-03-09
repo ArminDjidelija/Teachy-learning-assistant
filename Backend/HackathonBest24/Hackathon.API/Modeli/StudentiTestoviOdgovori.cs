@@ -12,7 +12,7 @@ namespace Hackathon.API.Modeli
         public StudentiTestovi StudentiTestovi { get; set; }
 
         [ForeignKey(nameof(Odgovor))]
-        public int OdgovorId { get; set; }
+        public int? OdgovorId { get; set; }
         public Odgovor Odgovor{ get; set; }
     }
 }

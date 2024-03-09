@@ -36,12 +36,19 @@ export class VirtualMentorComponent {
       document.getElementById('main')!.style.height = '20%';
       document.getElementById('toggleIcon')!.style.transform = 'rotate(0deg)';
       document.getElementById('response')!.style.transform = 'rotate(0deg)';
+      if(this.GPT_response!=="Kako vam mogu pomoći?")
+      {
+        debugger
+          document.getElementById('response')!.style.opacity = '0';
+      }
+
     }
     else if(!this.shrinkedChat)
     {
       document.getElementById('search')!.style.display = 'flex';
       document.getElementById('main')!.style.height = '83%';
       document.getElementById('toggleIcon')!.style.transform = 'rotate(180deg)';
+      document.getElementById('response')!.style.opacity = '1';
     }
 
   }

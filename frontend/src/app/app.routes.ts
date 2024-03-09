@@ -7,6 +7,7 @@ import {ProfesorPageComponent} from "./profesor-page/profesor-page.component";
 import {ProfesorPitanjaComponent} from "./profesor-pitanja/profesor-pitanja.component";
 import {ProfesorTestoviComponent} from "./profesor-testovi/profesor-testovi.component";
 import {ProfesorMaterijaliComponent} from "./profesor-materijali/profesor-materijali.component";
+import {StudentTestComponent} from "./student-test/student-test.component";
 import {ProfesorPocetnaComponent} from "./profesor-pocetna/profesor-pocetna.component";
 import {MaterijaliStudentComponent} from "./materijali-student/materijali-student.component";
 import {StudentPocetnaComponent} from "./student-pocetna/student-pocetna.component";
@@ -17,10 +18,10 @@ export const routes: Routes = [
   {path:'login', component:PrijavaComponent},
   {path:'student', component:StudentPageComponent, children:[
       {path:'testovi', component:TestoviStudentComponent},
+      {path:'test/:id', component: StudentTestComponent}
       {path:'materijali', component:MaterijaliStudentComponent},
       {path:'pocetna', component:StudentPocetnaComponent},
       {path:'zavrseni', component:StudentZavrseniTestoviComponent},
-
     ]},
   {path:'profesor', component:ProfesorPageComponent,children:[
       {path:'pitanjaprofesor',component:ProfesorPitanjaComponent},

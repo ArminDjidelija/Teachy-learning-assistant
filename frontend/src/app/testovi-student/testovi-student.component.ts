@@ -3,12 +3,15 @@ import {HttpClient} from "@angular/common/http";
 import {TestoviStudent, TestoviStudentResponse} from "./get-testovi-student";
 import {MojConfig} from "../moj-config";
 import {NgForOf} from "@angular/common";
+import {RouterLink} from "@angular/router";
+import {virtualManagerService} from "../services/virtualManager-service";
 
 @Component({
   selector: 'app-testovi-student',
   standalone: true,
   imports: [
-    NgForOf
+    NgForOf,
+    RouterLink
   ],
   templateUrl: './testovi-student.component.html',
   styleUrl: './testovi-student.component.css'
@@ -31,4 +34,5 @@ export class TestoviStudentComponent implements OnInit{
   }
 
 
+  protected readonly virtualManagerService = virtualManagerService;
 }
