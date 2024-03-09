@@ -48,7 +48,9 @@ namespace Hackathon.API.Controllers
         {
             var razredi = _applicationDbContext.RazrediProfesor.Include(x=>x.Razred).Where(x=>x.ProfesorId==id).Select(x=>new
             {
-                Naziv=x.Razred.RazredBroj + "-" + x.Razred.RazredKlasa,
+                Id=x.RazredId,
+                Naziv=x.Razred.RazredBroj,
+                Odjeljenje=x.Razred.RazredKlasa,
                 BrojUcenika = _applicationDbContext.Student.Where(y=>y.RazredId==x.RazredId).Count()
             }).ToList();
 

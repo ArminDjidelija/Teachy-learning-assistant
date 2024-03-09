@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hackathon.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240309101921_bazaSkripta")]
-    partial class bazaSkripta
+    [Migration("20240309123553_mig")]
+    partial class mig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
