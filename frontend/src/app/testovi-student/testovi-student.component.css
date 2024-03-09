@@ -1,0 +1,10 @@
+#btnHolder {
+  margin:0px -20px -20px -20px;
+  padding: 5px;
+  margin-bottom: 2.5px;
+
+}
+#btnHolder .btn {
+  border-radius:0px 0px 4px 4px !important;
+  height:40px;
+}
