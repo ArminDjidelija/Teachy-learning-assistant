@@ -21,7 +21,7 @@
     <td>{{obl.oblast.naziv}}</td>
     <td>
   <span *ngIf="obl.fileUrl">
-    <a>{{obl.fileUrl}}</a>
+    <a [href]="obl.fileUrl">{{obl.oblast.nazivFajla}}</a>
   </span>
       <span *ngIf="!obl.fileUrl">
     <input type="file" (change)="handleFileInput($event)" [multiple]="true" >

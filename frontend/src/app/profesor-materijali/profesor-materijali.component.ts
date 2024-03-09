@@ -5,6 +5,7 @@ import {MojConfig} from "../moj-config";
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {Oblast, OblastResp, OblastResponse} from "./get-oblasti-by-predmet";
+import {DialogService} from "../services/dialog-service";
 
 @Component({
   selector: 'app-profesor-materijali',
@@ -20,7 +21,7 @@ import {Oblast, OblastResp, OblastResponse} from "./get-oblasti-by-predmet";
 export class ProfesorMaterijaliComponent implements OnInit {
 
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private dialogService:DialogService) {
   }
 
   predmeti: PredmetiGetAllResponse[] = [];
@@ -50,7 +51,7 @@ export class ProfesorMaterijaliComponent implements OnInit {
   odabranaOblast!:number;
   sendData(id: number) {
     this.odabranaOblast=id;
-    this.sendFile(this.file)
+    this.sendFile(this.selectedFiles)
 
   }
 
@@ -84,7 +85,9 @@ export class ProfesorMaterijaliComponent implements OnInit {
     const headers=new HttpHeaders().append('Content-Disposition', 'multipart/form-data'); //Disposition
     let url=MojConfig.adresa_servera+`/MaterijalOblast`;
 
-    return this.httpClient.post(url, formData, {headers});
+    this.httpClient.post(url, formData, {headers}).subscribe(x=>{
+      //this.dohvatiPredmete();
+    })
   }
 
   sendFile(files: File[]) {
