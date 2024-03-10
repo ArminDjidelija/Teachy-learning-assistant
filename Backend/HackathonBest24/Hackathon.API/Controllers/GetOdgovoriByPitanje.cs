@@ -17,7 +17,7 @@ namespace Hackathon.API.Controllers
         [HttpGet]
         public async Task<ActionResult> Get([FromQuery] int pitanjeId)
         {
-            var odgovori = _applicationDbContext.Odgovor.Where(x => x.PitanjeId == pitanjeId).ToListAsync();
+            var odgovori = await _applicationDbContext.Odgovor.Where(x => x.PitanjeId == pitanjeId).ToListAsync();
             if(odgovori!=null)
             {
                 return Ok(odgovori);

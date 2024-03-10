@@ -86,36 +86,20 @@
         <div class="mb-3">
           <label class="form-label">Oblast</label>
           <select class="form-control" >
-            <option>Neka</option>
+            <option *ngFor="let oblast of oblasti" [value]="oblast.id">{{oblast.naziv}}</option>
           </select>
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Tip pitana</label>
+          <label class="form-label">Tip pitanja</label>
           <select class="form-control" >
-            <option>Neka</option>
+            <option *ngFor="let tip of tipovipitanja" [value]="tip.id">{{tip.naziv}}</option>
           </select>
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Godina studija</label>
-          <input class="form-control" placeholder="Godina studija"/>
+          <button class="btn btn-primary">Spremi odgovor</button>
         </div>
-
-        <div class="mb-3">
-          <label class="form-label">Ak godina</label>
-          <select class="form-control" >
-
-          </select>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Cijena školarine</label>
-          <input class="form-control"  placeholder="Cijena školarine" />
-        </div>
-
-
-
       </div>
       <div class="modal-footer">
         <button (click)="odgovoriModal=false;" type="button" class="btn btn-secondary" >Close</button>
