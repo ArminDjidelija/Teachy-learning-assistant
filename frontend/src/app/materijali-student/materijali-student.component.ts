@@ -27,7 +27,7 @@ export class MaterijaliStudentComponent {
   odabraniPredmet: number=1;
 
   dohvatiPredmete() {
-    let url = MojConfig.adresa_servera + `/Predmeti`;
+    let url = MojConfig.adresa_servera + `/Predmeti/getall`;
     this.httpClient.get<PredmetiGetAll>(url).subscribe(x => {
       this.predmeti = x;
     })
