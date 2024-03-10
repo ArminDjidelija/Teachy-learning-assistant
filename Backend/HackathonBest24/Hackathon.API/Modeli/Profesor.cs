@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Hackathon.API.Modeli
 {
-    public class Student
+    public class Profesor
     {
         [Key]
         public int Id { get; set; }
@@ -12,8 +12,5 @@ namespace Hackathon.API.Modeli
         public string Email { get; set; }
         public string Lozinka { get; set; }
 
-        [ForeignKey(nameof(Razred))]
-        public int RazredId { get; set; }
-        public Razred Razred { get; set; }
     }
 }
