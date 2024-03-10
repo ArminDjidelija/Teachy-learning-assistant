@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hackathon.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240309222638_miggg")]
-    partial class miggg
+    [Migration("20240309234732_miglilaa")]
+    partial class miglilaa
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -328,6 +328,9 @@ namespace Hackathon.API.Migrations
 
                     b.Property<DateTime?>("DatumZavrsetka")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("OsvojeniBodovi")
+                        .HasColumnType("int");
 
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
