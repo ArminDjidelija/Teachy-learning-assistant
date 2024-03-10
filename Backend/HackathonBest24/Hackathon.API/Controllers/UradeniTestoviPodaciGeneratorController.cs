@@ -87,13 +87,14 @@ namespace Hackathon.API.Controllers
             var studentiTestoviBaza = _applicationDbContext.StudentiTestovi.Include(x=>x.Test).Include(x=>x.Student).Take(3).OrderByDescending(x => x.Id).ToList();
             var testoviPitanjaBaza = _applicationDbContext.TestoviPitanja.Include(x => x.Pitanje).Include(x => x.Test)
                 .Where(x => x.TestId == testDodani1.Id).ToList();
-
+            var odgovoriBaza = _applicationDbContext.Odgovor.Include(x => x.Pitanje).ToList();
 
             foreach(var stb in studentiTestoviBaza)
             {
                 foreach(var p in testoviPitanja)
                 {
-                    var odgovori = testoviPitanjaBaza.Where(x => x.PitanjeId == p.PitanjeId).ToList();
+                    //var odgovori = testoviPitanjaBaza.Where(x => x.PitanjeId == p.PitanjeId && x.TestId==p.TestId).ToList();
+                    var odgovori = odgovoriBaza.Where(x => x.PitanjeId == p.PitanjeId).ToList();
                     var stdTestOdg = new StudentiTestoviOdgovori()
                     {
                         StudentiTestoviId = stb.Id,

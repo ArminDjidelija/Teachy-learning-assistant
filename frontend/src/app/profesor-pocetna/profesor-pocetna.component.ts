@@ -69,7 +69,7 @@ export class ProfesorPocetnaComponent implements OnInit {
         plugins: {
           title: {
             display: true,
-            text: 'Sitting time per day'
+            text: 'Prolaznost i izlaznost po testu'
           }
         },
         scales: {

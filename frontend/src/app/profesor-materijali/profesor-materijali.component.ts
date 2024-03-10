@@ -33,9 +33,10 @@ export class ProfesorMaterijaliComponent implements OnInit {
   }
 
   dohvatiPredmete() {
-    let url = MojConfig.adresa_servera + `/Predmeti`;
+    let url = MojConfig.adresa_servera + `/Predmeti/getall`;
     this.httpClient.get<PredmetiGetAll>(url).subscribe(x => {
       this.predmeti = x;
+      console.log(x);
     })
   }
 
