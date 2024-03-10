@@ -14,6 +14,10 @@ namespace Hackathon.API.Controllers
         {
             _applicationDbContext = applicationDbContext;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b6263e9035f0a0fef745a144ccd6fd53523c397d
         [HttpGet]
         public async Task<ActionResult> Get()
         {
