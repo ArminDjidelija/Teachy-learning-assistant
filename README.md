@@ -1,4 +1,18 @@
 # Topdzije - projekat : Teachy
+My colleagues and I took part in this year's hackathon, which was organized by our Local BEST Group in Mostar with the main focus of this year's theme being AI in Education. Our solution was a Learning Management System for schools and universities called "Teachy".
+
+"Topdžije" team:
+
+• Ensar Čevra
+
+• Zaim Mehić
+
+• Armin Đidelija
+
+• Adnan Humačkić
+
+• Nedim Mustafić
+
 Tehnologije korištene u projektu: OpenAI, Angular, ASP.NET Core, SQL, HTML, CSS, JS, TS, Bootstrap
 
 Uputstvo za korištenje:
